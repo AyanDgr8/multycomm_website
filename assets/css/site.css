@@ -1464,6 +1464,35 @@ strong { color: var(--ink-800); font-weight: 600; }
 .frame--wide { aspect-ratio: 16 / 10; }
 .frame--squat { aspect-ratio: 16 / 7; }
 
+/* AI and language: the multilingual artwork is the container backdrop. */
+.ai-language {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2rem, 1rem + 4vw, 4.8rem);
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.92) 50%, rgba(255,255,255,.55) 100%),
+    url("../img/hero-languages.jpg") center / cover no-repeat;
+  box-shadow: var(--sh-lg);
+}
+.ai-language > div { max-width: 820px; }
+.ai-language .card {
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(10px);
+}
+.ai-language__note {
+  color: var(--ink-700);
+  max-width: 74ch;
+}
+@media (max-width: 700px) {
+  .ai-language {
+    background:
+      linear-gradient(rgba(255,255,255,.92), rgba(255,255,255,.92)),
+      url("../img/hero-languages.jpg") center / cover no-repeat;
+  }
+}
+
 /* decorative offset frame used on about/contact */
 .frame-stack { position: relative; }
 .frame-stack::before {
@@ -2119,3 +2148,28 @@ strong { color: var(--ink-800); font-weight: 600; }
 
 @media (max-width: 939px) { .orbit { width: min(320px, 70%); } }
 @media (max-width: 420px) { .orbit { display: none; } }
+
+/* ---------- partner logo plate ----------
+   Bitrix24, Salesforce and Zoho are multi-colour third-party marks: Bitrix's
+   navy "24" and Zoho's black wordmark both vanish on a dark card. So every mark
+   sits on its own white plate, which works on light and dark cards alike and
+   keeps the three reading as one set. src/crm.py already balanced them by
+   apparent size onto a shared 264px canvas, so one CSS height is enough. */
+.crm__logo {
+  align-self: flex-start;
+  display: inline-flex; align-items: center;
+  padding: .5rem 1.05rem;
+  margin-bottom: 1.2rem;
+  border-radius: 15px;
+  background: linear-gradient(170deg, #fff, #F4F7FB);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-xs), inset 0 1px 0 #fff;
+  transition: transform .38s var(--ease), box-shadow .38s var(--ease), border-color .38s var(--ease);
+}
+.crm__logo img { height: 46px; width: auto; }
+.card:hover .crm__logo {
+  transform: translateY(-2px);
+  box-shadow: var(--sh), inset 0 1px 0 #fff;
+  border-color: var(--brand-100);
+}
+.card--dark .crm__logo { border-color: rgba(255,255,255,.16); }

@@ -21,7 +21,7 @@ from PIL import Image
 IMG = Path(__file__).resolve().parent.parent / "assets" / "img"
 SRC = IMG / "logos"
 
-CANVAS = (800, 264)      # shared 2x box; every mark is centred in this
+CANVAS_H = 264           # shared 2x canvas height; width follows each mark
 TARGET_INK = 40_000      # ink pixels each mark is scaled to cover
 TARGET_BOX = 90_000      # bounding-box pixels each mark is scaled to cover
 FLOOR = 12               # coverage below this is JPEG/WebP ringing
@@ -87,17 +87,18 @@ def main():
         if box:
             mark = mark.crop(box)
 
-        scale = min(balance(mark), CANVAS[0] / mark.width, CANVAS[1] / mark.height)
+        scale = min(balance(mark), CANVAS_H / mark.height)
         mark = mark.resize((max(1, round(mark.width * scale)),
                             max(1, round(mark.height * scale))), Image.LANCZOS)
 
-        canvas = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
-        canvas.alpha_composite(mark, ((CANVAS[0] - mark.width) // 2,
-                                      (CANVAS[1] - mark.height) // 2))
+        # One shared canvas height, natural width: the markup sets a single
+        # CSS height and each mark lands at its balanced size, flush left.
+        canvas = Image.new("RGBA", (mark.width, CANVAS_H), (0, 0, 0, 0))
+        canvas.alpha_composite(mark, (0, (CANVAS_H - mark.height) // 2))
         path = IMG / out_name
         canvas.save(path, "WEBP", quality=92, method=6)
-        print(f"  {out_name:22} mark {mark.width}x{mark.height} "
-              f"in {CANVAS[0]}x{CANVAS[1]}  {path.stat().st_size / 1024:5.1f} KB")
+        print(f"  {out_name:22} {canvas.width}x{canvas.height}"
+              f"  mark {mark.width}x{mark.height}  {path.stat().st_size / 1024:5.1f} KB")
 
 
 if __name__ == "__main__":
