@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MultyComm — Voice, WhatsApp and AI on one cloud platform</title>
+<meta name="description" content="MultyComm is a multi-tenant UCaaS/CCaaS platform built for carriers and enterprises who need voice, WhatsApp and AI-powered support unified in one system. Trusted across India, the UAE and North America.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<meta property="og:title" content="MultyComm — Voice, WhatsApp and AI on one cloud platform">
+<meta property="og:description" content="One platform. Every channel. Any scale. Carrier-grade UCaaS and CCaaS with 99.999% availability.">
+<meta property="og:type" content="website">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- icon sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.8 10.2a5 5 0 0 0 3.8 3.8l1.4-1.4a1.4 1.4 0 0 1 1.5-.3c.9.3 1.9.5 2.9.6a1.4 1.4 0 0 1 1.2 1.4v2.4a1.4 1.4 0 0 1-1.5 1.4A17 17 0 0 1 8.5 3.9 1.4 1.4 0 0 1 9.9 2.4h2.4a1.4 1.4 0 0 1 1.4 1.2c.1 1 .3 2 .6 2.9a1.4 1.4 0 0 1-.3 1.5z" transform="translate(-2 1)"/></symbol>
+<symbol id="i-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.9 9.9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></symbol>
+<symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4M8 4h8M8 14h.01M16 14h.01M9.5 17.5h5"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.1a4 4 0 0 1 0 7.8M22 21v-2a4 4 0 0 0-3-3.9"/><circle cx="9" cy="7" r="4"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 15l3.5-4 3 2.5L19 7"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 9 4.5-2.6a1 1 0 0 1 1.5.9v9.4a1 1 0 0 1-1.5.9L16 15z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9 6 6 0 0 0-11.6 1.5A3.8 3.8 0 0 0 7 19z"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="2"/><path d="M15 9h3a2 2 0 0 1 2 2v10M8 7h3M8 11h3M8 15h3"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.6 13.2a.7.7 0 0 0 .6 1.1H11l-1 8.7 8.4-11.2a.7.7 0 0 0-.6-1.1H12z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+<symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2zM20 15a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2z"/><path d="M18 17v1a3 3 0 0 1-3 3h-2"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0zM12 17v5"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.8a1 1 0 0 1 2 0l1 5.5a2 2 0 0 0 1.6 1.6l5.5 1a1 1 0 0 1 0 2l-5.5 1a2 2 0 0 0-1.6 1.6l-1 5.5a1 1 0 0 1-2 0l-1-5.5a2 2 0 0 0-1.6-1.6l-5.5-1a1 1 0 0 1 0-2l5.5-1A2 2 0 0 0 10 8.3z"/><path d="M20 2v4M22 4h-4"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></symbol>
+<symbol id="i-lang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h11M8.5 3v2c0 4.4-2.5 8-5.5 9M5 12c0 2.5 2.9 4.6 6.5 5"/><path d="m13 21 4.5-11L22 21M14.8 17.5h5.4"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/><circle cx="12" cy="15.5" r="1"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5z"/><path d="M6 11.5V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5M22 9v5"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V8M2 12h20a0 0 0 0 1 0 0v8M2 16h20"/><path d="M6 12V9h5.5a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5a2.1 2.1 0 0 0-3-3L13 8 4.8 6.2a.5.5 0 0 0-.5.8L8 11l-2 3H3l2 3 3-1 3-2 3.9 3.7a.5.5 0 0 0 .8-.5z"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/></symbol>
+<symbol id="i-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2.2"/><circle cx="5" cy="20" r="2.2"/><circle cx="19" cy="20" r="2.2"/><path d="M12 6.2v5.3M12 11.5H5v6.3M12 11.5h7v6.3"/></symbol>
+<symbol id="i-case" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2 13h20"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5a4 4 0 1 0 4 6.6l4.5 4.5-2.4 2.4-4.5-4.5a4 4 0 0 1-6.6-4l2.5 2.5 2.5-2.5z"/><path d="m7 14-4.5 4.5 2.4 2.4L9 17"/></symbol>
+<symbol id="i-hands" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-4-4 3.5-3.5a3 3 0 0 1 4.2 0L17 12M2 12l4-4 5 5M22 12l-4-4-3 3"/><path d="m13 19 2 2 7-7-3-3"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="m9 15 2 2 4-4"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+</defs></svg>
+
+<!-- ═══════════ header ═══════════ -->
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <span class="dot dot--live"></span>
+    <span>Now available — domestic &amp; international landline and mobile numbers with unlimited calling.</span>
+    <a href="pricing.html">See the plans</a>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap site-head__in">
+    <a class="brand" href="index.html" aria-label="MultyComm home">
+      <img class="brand__logo" src="assets/img/logo-lockup.webp" alt="MultyComm"
+           width="1462" height="298" fetchpriority="high" decoding="async">
+      <span class="brand__sub">UCaaS · CCaaS · CPaaS</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="insights.html">Insights</a></li>
+      </ul>
+    </nav>
+
+    <div class="head-cta">
+      <a class="btn btn--ghost btn--sm" href="contact.html">Log in</a>
+      <a class="btn btn--primary btn--sm" href="contact.html">Get a Demo</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
+    </div>
+  </div>
+  <div class="scroll-rail"><i></i></div>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <div class="drawer__panel">
+    <div class="drawer__top">
+      <a class="brand" href="index.html" aria-label="MultyComm home">
+        <img class="brand__logo" src="assets/img/logo-lockup.webp" alt="MultyComm"
+             width="1462" height="298" decoding="async">
+      </a>
+      <button class="drawer__close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+    <nav aria-label="Mobile">
+      <a href="index.html" aria-current="page">Home <svg><use href="#i-arrow"/></svg></a>
+      <a href="products.html">Products <svg><use href="#i-arrow"/></svg></a>
+      <a href="solutions.html">Solutions <svg><use href="#i-arrow"/></svg></a>
+      <a href="services.html">Services <svg><use href="#i-arrow"/></svg></a>
+      <a href="pricing.html">Pricing <svg><use href="#i-arrow"/></svg></a>
+      <a href="about.html">About <svg><use href="#i-arrow"/></svg></a>
+      <a href="partners.html">Partners <svg><use href="#i-arrow"/></svg></a>
+      <a href="insights.html">Insights <svg><use href="#i-arrow"/></svg></a>
+      <a href="contact.html">Contact <svg><use href="#i-arrow"/></svg></a>
+    </nav>
+    <a class="btn btn--primary" href="contact.html">Get a Demo <svg><use href="#i-arrow"/></svg></a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ═══════════ hero ═══════════ -->
+<section class="hero">
+  <div class="hero__grid"></div>
+  <div class="wrap hero__in">
+
+    <div>
+      <p class="kicker" data-reveal>One platform · Every channel · Any scale</p>
+      <h1 class="h-hero" data-reveal style="--d:60ms">
+        Every conversation, <span class="mark">on one platform.</span>
+      </h1>
+      <p class="lead mt-2" data-reveal style="--d:130ms">
+        MultyComm is a multi-tenant UCaaS/CCaaS platform built for carriers and enterprises who need
+        voice, WhatsApp and AI-powered support unified in one system — trusted across India, the UAE
+        and North America, from single-tenant deployments to full carrier-grade infrastructure.
+      </p>
+
+      <div class="btn-row mt-3" data-reveal style="--d:200ms">
+        <a class="btn btn--primary btn--lg" href="contact.html">Get a Demo <svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--ghost btn--lg" href="products.html">See how it works</a>
+      </div>
+
+      <div class="hero__stats" data-reveal style="--d:270ms">
+        <div>
+          <b><span data-count="99.999" data-suffix="%">99.999%</span></b>
+          <span>Platform availability</span>
+        </div>
+        <div>
+          <b><span data-count="88">88</span></b>
+          <span>Languages translated live</span>
+        </div>
+        <div>
+          <b><span data-count="18">18</span></b>
+          <span>Social channels, two-way</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="console-wrap" data-reveal style="--d:180ms">
+      <div class="console">
+        <div class="console__bar">
+          <b>Unified agent desk</b>
+          <span class="tag"><span class="dot dot--live"></span> Live</span>
+        </div>
+
+        <div class="console__body">
+          <article class="thread is-active">
+            <span class="thread__ch" data-ch="whatsapp"><svg><use href="#i-msg"/></svg></span>
+            <span>
+              <span class="thread__who">Priya Menon · WhatsApp</span>
+              <span class="thread__msg">Has my replacement handset shipped yet?</span>
+            </span>
+            <span class="thread__meta">Queue<b>0:04</b></span>
+          </article>
+
+          <article class="thread">
+            <span class="thread__ch" data-ch="voice"><svg><use href="#i-phone"/></svg></span>
+            <span>
+              <span class="thread__who">Inbound call · +971 4 ••• 2280</span>
+              <span class="thread__msg">Skill-routed to Tier 2 · recording on</span>
+            </span>
+            <span class="thread__meta">Talk<b>2:41</b></span>
+          </article>
+
+          <article class="thread">
+            <span class="thread__ch" data-ch="ai"><svg><use href="#i-bot"/></svg></span>
+            <span>
+              <span class="thread__who">AI voicebot · Outbound campaign</span>
+              <span class="thread__msg">Reminder calls — 412 of 900 completed</span>
+            </span>
+            <span class="thread__meta">Auto<b>46%</b></span>
+          </article>
+
+          <article class="thread">
+            <span class="thread__ch" data-ch="instagram"><svg><use href="#i-share"/></svg></span>
+            <span>
+              <span class="thread__who">@northgate.retail · Instagram</span>
+              <span class="thread__msg">Translated from Arabic · sentiment positive</span>
+            </span>
+            <span class="thread__meta">Queue<b>0:11</b></span>
+          </article>
+
+          <article class="thread">
+            <span class="thread__ch" data-ch="video"><svg><use href="#i-video"/></svg></span>
+            <span>
+              <span class="thread__who">Onboarding review · 6 parties</span>
+              <span class="thread__msg">Live transcription + summary enabled</span>
+            </span>
+            <span class="thread__meta">Room<b>HD</b></span>
+          </article>
+        </div>
+
+        <div class="console__foot">
+          <span class="who">
+            <span class="avatars"><i>AR</i><i>KS</i><i>MJ</i><i>+9</i></span>
+            12 agents on shift
+          </span>
+          <span class="live">
+            <span class="bars"><i></i><i></i><i></i><i></i><i></i></span>
+            Sentiment tracking
+          </span>
+        </div>
+      </div>
+
+      <div class="float float--a">
+        <span class="float__ic"><svg><use href="#i-zap"/></svg></span>
+        <span><b>Click-to-call</b><span>Fired from the CRM</span></span>
+      </div>
+      <div class="float float--b">
+        <span class="float__ic"><svg><use href="#i-lang"/></svg></span>
+        <span><b>88 languages</b><span>Translated in real time</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ clients ═══════════ -->
+<section class="section section--tint" style="padding-block:clamp(2.4rem,1.6rem+2vw,3.4rem)">
+  <div class="wrap">
+    <p class="center tiny dim" style="letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:1.8rem" data-reveal>
+      Trusted by leading corporations
+    </p>
+    <div class="marquee" data-reveal>
+      <div class="marquee__track">
+        <img src="assets/img/client-delmonte.jpg" alt="Del Monte" loading="lazy">
+        <img src="assets/img/client-hutch.jpg" alt="Hutch" loading="lazy">
+        <img src="assets/img/client-cellcard.jpg" alt="Cellcard, Royal Group" loading="lazy">
+        <img src="assets/img/client-biz2credit.jpg" alt="Biz2Credit" loading="lazy">
+        <img src="assets/img/client-ezms.jpg" alt="EZMS" loading="lazy">
+        <img src="assets/img/client-spiderlink.jpg" alt="Spiderlink" loading="lazy">
+        <img src="assets/img/client-rai-university.jpg" alt="Rai University" loading="lazy">
+        <img src="assets/img/client-kreditstack.jpg" alt="Kreditstack" loading="lazy">
+        <img src="assets/img/client-bikesetu.jpg" alt="BikeSetu" loading="lazy">
+        <img src="assets/img/client-triliv.jpg" alt="Triliv" loading="lazy">
+        <img src="assets/img/client-cube.jpg" alt="Cube" loading="lazy">
+        <img src="assets/img/client-unahttar.jpg" alt="Unahttar" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ tailored solutions ═══════════ -->
+<section class="section">
+  <div class="wrap split split--wide-right">
+    <div class="frame-stack" data-reveal>
+      <div class="frame frame--wide">
+        <img src="assets/img/network-mesh.jpg" width="960" height="880" loading="lazy"
+             alt="Connected nodes representing enterprise users and telecom carriers on one unified cloud communication platform.">
+      </div>
+    </div>
+
+    <div>
+      <p class="kicker" data-reveal>Tailored cloud communication</p>
+      <h2 class="h2" data-reveal>Empower your business with a <span class="swipe">unified platform</span></h2>
+      <p class="lead mt-2" data-reveal>
+        MultyComm offers tailored cloud communication solutions designed for enterprises and telecom
+        carriers. Our platform provides enterprise-grade reliability, scalability and
+        cost-effectiveness — and whether you need a standalone solution or a multi-tenant system,
+        it adapts to your business model and branding.
+      </p>
+      <ul class="speclist mt-3" data-reveal>
+        <li><svg><use href="#i-check"/></svg> Multi-tenant or single-tenant deployment</li>
+        <li><svg><use href="#i-check"/></svg> White-labelled to your own brand</li>
+        <li><svg><use href="#i-check"/></svg> DC, DR or private-cloud hosting</li>
+        <li><svg><use href="#i-check"/></svg> 100% API driven, integration-first</li>
+        <li><svg><use href="#i-check"/></svg> Geo-redundant cluster architecture</li>
+        <li><svg><use href="#i-check"/></svg> Built-in billing and NOC</li>
+      </ul>
+      <p class="mt-3" data-reveal><a class="link" href="products.html">Explore the platforms <svg><use href="#i-arrow"/></svg></a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ capabilities ═══════════ -->
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="kicker kicker--plain" data-reveal>Integrated real-time communication</p>
+      <h2 class="h2" data-reveal>Six capabilities, one place to run them</h2>
+      <p class="lead mt-2" data-reveal>
+        Voice, messaging, social, video, AI and quality management share one directory, one set of
+        reports and one bill — instead of six tools that never quite talk to each other.
+      </p>
+    </div>
+
+    <div class="grid g-3">
+      <a class="cap" href="products.html" data-reveal>
+        <img src="assets/img/cap-click-to-call.jpg" width="760" height="950" loading="lazy"
+             alt="One-click calling for instant voice calls from any website or integrated CRM platform.">
+        <span class="cap__in">
+          <span class="cap__tag">Click to call</span>
+          <h3>One-touch calling in your website or CRM</h3>
+          <p>Fire a call straight from a record with the embedded dialer — no tab-switching, and every
+             call, recording and disposition lands back on the customer.</p>
+        </span>
+      </a>
+
+      <a class="cap" href="products.html" data-reveal>
+        <img src="assets/img/cap-mobileuc.jpg" width="760" height="950" loading="lazy"
+             alt="Crystal-clear voice communication using MultyComm's mobile Unified Communications app.">
+        <span class="cap__in">
+          <span class="cap__tag">MobileUC</span>
+          <h3>Crystal-clear voice on the MobileUC app</h3>
+          <p>Android, iOS and desktop clients with voice, video and collaboration — your desk
+             extension travels with the team, free of roaming and CUG costs.</p>
+        </span>
+      </a>
+
+      <a class="cap" href="products.html" data-reveal>
+        <img src="assets/img/cap-ai-agents.jpg" width="760" height="950" loading="lazy"
+             alt="AI-powered voice agents and voice bots automating customer interactions.">
+        <span class="cap__in">
+          <span class="cap__tag">AI agents</span>
+          <h3>AI voice &amp; chat agents</h3>
+          <p>Configurable voicebots and chatbots with learning capability, word spotting and
+             real-time sentiment — humanised bot agents that hand off cleanly to people.</p>
+        </span>
+      </a>
+
+      <a class="cap" href="products.html" data-reveal>
+        <img src="assets/img/cap-social.jpg" width="760" height="950" loading="lazy"
+             alt="Unified social media panel managing WhatsApp, Instagram, Facebook and more from one dashboard.">
+        <span class="cap__in">
+          <span class="cap__tag">Omnichannel</span>
+          <h3>Seamless social media integration</h3>
+          <p>Two-way conversations across Telegram, Instagram, WhatsApp, Facebook, Viber, Line,
+             Snapchat and more — 18 channels in a single pane.</p>
+        </span>
+      </a>
+
+      <a class="cap" href="solutions.html" data-reveal>
+        <img src="assets/img/cap-cx.jpg" width="760" height="950" loading="lazy"
+             alt="A unified customer experience platform with integrated voice, chat and social messaging.">
+        <span class="cap__in">
+          <span class="cap__tag">Unified CX</span>
+          <h3>One customer experience, every channel</h3>
+          <p>Skill-based routing, virtual and priority queues, multi-level dispositions and CRM
+             pop-ups keep the context with the customer, not the channel.</p>
+        </span>
+      </a>
+
+      <a class="cap" href="products.html" data-reveal>
+        <img src="assets/img/cap-quality.jpg" width="760" height="950" loading="lazy"
+             alt="AI-powered quality management and sentiment analysis for contact centre performance.">
+        <span class="cap__in">
+          <span class="cap__tag">Quality</span>
+          <h3>Advanced quality management &amp; analysis</h3>
+          <p>Live call-quality matrices, sentiment analysis, cradle-to-grave reporting and CSAT on
+             both the agent and customer side.</p>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ carrier-grade band ═══════════ -->
+<section class="section band">
+  <div class="band__mesh"></div>
+  <div class="wrap">
+    <div class="section-head" style="max-width:56ch">
+      <p class="kicker kicker--dark" data-reveal>Carrier-grade by design</p>
+      <h2 class="h2" data-reveal>Built to run a carrier, not just a call queue</h2>
+      <p class="lead mt-2" data-reveal>
+        MultyComm's platforms are carrier-grade and built for high-performance deployment across
+        telecom carriers and enterprise environments — deployable in data centres, disaster-recovery
+        setups or private cloud.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat" data-reveal>
+        <b><span data-count="99.999" data-suffix="%">99.999%</span></b>
+        <span>Availability across cluster architecture</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="2000" data-suffix="+">2000+</span></b>
+        <span>Man-years of combined technical experience</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="120" data-suffix=" min">120 min</span></b>
+        <span>TAC3 escalation window for major issues</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="24" data-suffix="×7">24×7</span></b>
+        <span>Support from teams in two countries</span>
+      </div>
+    </div>
+
+    <div class="grid g-3 mt-3" style="margin-top:clamp(2.6rem,1.6rem+2vw,3.8rem)">
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-server"/></svg></span>
+        <h3>Carrier platforms</h3>
+        <p>Multi-tenant clusters with in-built SBC, integrated SMS-C, real-time prepaid billing BSS,
+           SS7 / ISDN-PRI / analog interworking and white-labelling for carriers.</p>
+        <a class="link" href="products.html" style="color:var(--brand)">Carrier spec <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-building"/></svg></span>
+        <h3>Enterprise platforms</h3>
+        <p>Full PBX feature set, drag-and-drop multi-level IVR, predictive and progressive dialers,
+           campaign manager, LDAP and SSO, operator panel and dynamic IVR.</p>
+        <a class="link" href="products.html" style="color:var(--brand)">Enterprise spec <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-shield"/></svg></span>
+        <h3>Security &amp; compliance</h3>
+        <p>Network and user-level security, multi-factor authentication, call-record masking and
+           credentials encrypted at rest — with numbers KYC'd by licensed operators.</p>
+        <a class="link" href="services.html" style="color:var(--brand)">How we operate <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AI + language ═══════════ -->
+<section class="section">
+  <div class="wrap split split--wide-left">
+    <div>
+      <p class="kicker" data-reveal>AI &amp; language</p>
+      <h2 class="h2" data-reveal>Speak your customer's language — <span class="swipe">automatically</span></h2>
+      <p class="lead mt-2" data-reveal>
+        MultyComm simplifies global customer engagement with seamless translation and transcription
+        tools, helping businesses connect in any language across calls, chats and support channels.
+      </p>
+
+      <div class="grid g-2 mt-3" data-reveal>
+        <div class="card">
+          <span class="card__ic"><svg><use href="#i-lang"/></svg></span>
+          <h3>Real-time translation</h3>
+          <p>88-language translation and transcription across voice, chat and video, with on-screen
+             captions and post-call summarisation.</p>
+        </div>
+        <div class="card">
+          <span class="card__ic"><svg><use href="#i-spark"/></svg></span>
+          <h3>Agent assist</h3>
+          <p>Integrated ChatGPT and Claude for prompts, in-line grammar and speech correction, canned
+             responses and a rules framework.</p>
+        </div>
+        <div class="card">
+          <span class="card__ic"><svg><use href="#i-mic"/></svg></span>
+          <h3>Voice biometrics</h3>
+          <p>Video transcripts, voice biometric checks and background noise cancellation on every
+             conference and recorded call.</p>
+        </div>
+        <div class="card">
+          <span class="card__ic"><svg><use href="#i-trend"/></svg></span>
+          <h3>Sentiment &amp; word spotting</h3>
+          <p>Real-time sentiment analysis with an AI-assisted reporting and graphing engine, plus AI
+             supervisors watching the floor.</p>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal>
+      <div class="frame frame--tall">
+        <img src="assets/img/hero-languages.jpg" width="1600" height="600" loading="lazy"
+             alt="Multilingual thank-you messages representing MultyComm's translation and transcription services."
+             style="object-position:center">
+      </div>
+      <p class="tiny dim mt-2">
+        Use your own social media and AI accounts — no additional markup charges on standard platform
+        pricing.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ industries ═══════════ -->
+<section class="section section--warm">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker" data-reveal>Solutions by industry</p>
+      <h2 class="h2" data-reveal>Configured for how your sector actually works</h2>
+      <p class="lead mt-2" data-reveal>
+        The same platform, shaped to the billing model, compliance posture and workflow of your
+        industry — from occupancy-based hotel billing to call-record masking in banking.
+      </p>
+    </div>
+
+    <div class="grid g-3">
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-bed"/></svg></span>
+        <h3>Hospitality</h3>
+        <p>Occupancy-based billing, no CAPEX, re-use of existing room phone hardware and a customised
+           hotel mobile application.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-branch"/></svg></span>
+        <h3>Multi-branch enterprises</h3>
+        <p>Free intra-office calling, 100% CRM integration with recording, and freedom from roaming
+           and CUG costs.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-plane"/></svg></span>
+        <h3>Travel &amp; tourism</h3>
+        <p>Bulk WhatsApp reminders, full inbound and outbound service, and close integration with
+           travel CRMs and tools.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-cap"/></svg></span>
+        <h3>Education</h3>
+        <p>Admissions helplines, self-help bots, multilingual distance learning with live translation
+           and teacher/parent privacy controls.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-case"/></svg></span>
+        <h3>Business process outsourcing</h3>
+        <p>100% agent management, superior scaling, and a cradle-to-grave customisable reporting
+           engine with AI agents.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card" href="solutions.html" data-reveal>
+        <span class="card__ic"><svg><use href="#i-bank"/></svg></span>
+        <h3>Banking &amp; finance</h3>
+        <p>Secure and compliant by default, with call-record masking, dynamic IVR, supervisor barge
+           and coach, and ML-capable bots.</p>
+        <span class="link">Details <svg><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CRM integration ═══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="kicker kicker--plain" data-reveal>CRM integration</p>
+      <h2 class="h2" data-reveal>Your dialer, inside the CRM your team already uses</h2>
+      <p class="lead mt-2" data-reveal>
+        Click-to-call, auto-dialing and real-time screen pop-ups embedded directly in Bitrix,
+        Salesforce and Zoho — every call, recording and interaction logged back automatically.
+      </p>
+    </div>
+
+    <div class="grid g-3">
+      <div class="card" data-reveal>
+        <img src="assets/img/crm-bitrix.jpg" width="238" height="88" loading="lazy"
+             alt="Bitrix and MultyComm CRM integration" style="height:38px;width:auto;margin-bottom:1.1rem">
+        <h3>Bitrix</h3>
+        <p>Manage all calls inside Bitrix with the embedded dialer — answer inbound and outbound
+           calls without switching between tabs or applications.</p>
+      </div>
+      <div class="card" data-reveal>
+        <img src="assets/img/crm-salesforce.jpg" width="200" height="140" loading="lazy"
+             alt="Salesforce and MultyComm CRM integration" style="height:38px;width:auto;margin-bottom:1.1rem">
+        <h3>Salesforce</h3>
+        <p>Real-time screen pop-ups delivered to agents without switching screens, powered by a
+           dialer embedded inside SFDC.</p>
+      </div>
+      <div class="card" data-reveal>
+        <img src="assets/img/crm-zoho.jpg" width="200" height="140" loading="lazy"
+             alt="Zoho and MultyComm CRM integration" style="height:38px;width:auto;margin-bottom:1.1rem">
+        <h3>Zoho</h3>
+        <p>Calls, recordings and interaction data logged straight into Zoho, with full visibility of
+           agent performance and easy outbound campaigns.</p>
+      </div>
+    </div>
+
+    <p class="center mt-3" data-reveal>
+      <a class="link" href="partners.html">See every integration partner <svg><use href="#i-arrow"/></svg></a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ service promise ═══════════ -->
+<section class="section section--tint">
+  <div class="wrap split">
+    <div>
+      <p class="kicker" data-reveal>The service behind the software</p>
+      <h2 class="h2" data-reveal>Exceptional products need exceptional support</h2>
+      <p class="lead mt-2" data-reveal>
+        We take a 360-degree approach to service, with teams across multiple cities working in shifts
+        to deliver 24/7 support for both carrier and enterprise customers — and a dedicated TAC3 team
+        that picks up any major escalation still unresolved after 120 minutes.
+      </p>
+      <div class="btn-row mt-3" data-reveal>
+        <a class="btn btn--dark" href="services.html">How we support you <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+
+    <div class="grid g-2" data-reveal>
+      <div class="card">
+        <span class="card__ic"><svg><use href="#i-headset"/></svg></span>
+        <h3>Tier 1–3, round the clock</h3>
+        <p>24×7 engineering assistance from two international locations, reachable by email, chat,
+           phone or the collaboration platform.</p>
+      </div>
+      <div class="card">
+        <span class="card__ic"><svg><use href="#i-clock"/></svg></span>
+        <h3>Minute-by-minute tickets</h3>
+        <p>An advanced ticketing system with real-time updates on issues and every enhancement
+           applied to your platform.</p>
+      </div>
+      <div class="card">
+        <span class="card__ic"><svg><use href="#i-file"/></svg></span>
+        <h3>48-step acceptance</h3>
+        <p>Implementation verified against a comprehensive acceptance test manual, including
+           dedicated integration touchpoint testing.</p>
+      </div>
+      <div class="card">
+        <span class="card__ic"><svg><use href="#i-tool"/></svg></span>
+        <h3>Preventive maintenance</h3>
+        <p>Timely patching, OS and package upgrades, and major annual feature releases with full
+           records kept per system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ insights ═══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;justify-content:space-between;max-width:none">
+      <div style="max-width:52ch">
+        <p class="kicker" data-reveal>Insights</p>
+        <h2 class="h2" data-reveal>Notes from the platform team</h2>
+      </div>
+      <a class="link" href="insights.html" data-reveal>All articles <svg><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <div class="grid g-3">
+      <a class="post" href="insights.html" data-reveal>
+        <span class="post__ph"><img src="assets/img/post-agentic.jpg" width="908" height="682" loading="lazy" alt=""></span>
+        <span class="post__body">
+          <span class="post__tag">AI</span>
+          <h3>MAVE: the future of AI-powered voice intelligence for smarter business communication</h3>
+          <span class="post__meta"><svg><use href="#i-spark"/></svg> Product</span>
+        </span>
+      </a>
+      <a class="post" href="insights.html" data-reveal>
+        <span class="post__ph"><img src="assets/img/post-crm.jpg" width="908" height="682" loading="lazy" alt=""></span>
+        <span class="post__body">
+          <span class="post__tag">CX</span>
+          <h3>How CRM integration with the MultyComm contact centre transforms customer experience</h3>
+          <span class="post__meta"><svg><use href="#i-plug"/></svg> Integration</span>
+        </span>
+      </a>
+      <a class="post" href="insights.html" data-reveal>
+        <span class="post__ph"><img src="assets/img/post-healthcare.jpg" width="908" height="682" loading="lazy" alt=""></span>
+        <span class="post__body">
+          <span class="post__tag">Healthcare</span>
+          <h3>Seamless, secure and multilingual communication for hospitals</h3>
+          <span class="post__meta"><svg><use href="#i-shield"/></svg> Sector</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section section--flush-top">
+  <div class="wrap">
+    <div class="cta cta--split" data-reveal>
+      <div>
+        <p class="kicker kicker--dark">Elevate your communication</p>
+        <h2 class="h2">One platform. Every channel. Any scale.</h2>
+        <p class="lead">
+          Tell us how your operation is wired today and we'll show you the version of it that runs on
+          MultyComm — carrier or enterprise, standalone or multi-tenant.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="contact.html">Get a Demo <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--onDark btn--lg" href="pricing.html">See pricing &amp; bundles</a>
+        </div>
+      </div>
+
+      <!-- every channel, orbiting the one platform they all land in -->
+      <div class="orbit" aria-hidden="true">
+        <i class="orbit__ring"></i>
+        <i class="orbit__ring orbit__ring--mid"></i>
+        <i class="orbit__ring orbit__ring--in"></i>
+
+        <span class="orbit__core">
+          <img src="assets/img/logo-mark-light.webp" alt="" width="314" height="314" loading="lazy" decoding="async">
+        </span>
+
+        <span class="orbit__sat" style="--a:0deg;   --t:34s"><b data-ch="voice"><svg><use href="#i-phone"/></svg></b></span>
+        <span class="orbit__sat" style="--a:120deg; --t:34s"><b data-ch="whatsapp"><svg><use href="#i-msg"/></svg></b></span>
+        <span class="orbit__sat" style="--a:240deg; --t:34s"><b data-ch="social"><svg><use href="#i-share"/></svg></b></span>
+
+        <span class="orbit__sat orbit__sat--mid" style="--a:60deg;  --t:24s"><b data-ch="video"><svg><use href="#i-video"/></svg></b></span>
+        <span class="orbit__sat orbit__sat--mid" style="--a:200deg; --t:24s"><b data-ch="ai"><svg><use href="#i-bot"/></svg></b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════ footer ═══════════ -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="brand brand--lg" href="index.html" aria-label="MultyComm home">
+          <img class="brand__logo" src="assets/img/logo-lockup-light.webp" alt="MultyComm"
+               width="1462" height="298" loading="lazy" decoding="async">
+          <span class="brand__sub">Seamless connection, anytime and anywhere</span>
+        </a>
+        <p class="foot__blurb">
+          A multi-tenant cloud communication platform for carriers and enterprises — voice, WhatsApp,
+          social, video and AI in one system.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:.45rem">
+          <span class="chip chip--onDark"><svg><use href="#i-pin"/></svg> New Delhi</span>
+          <span class="chip chip--onDark"><svg><use href="#i-globe"/></svg> UAE</span>
+          <span class="chip chip--onDark"><svg><use href="#i-globe"/></svg> North America</span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="products.html">Carrier platforms</a></li>
+          <li><a href="products.html">Enterprise platforms</a></li>
+          <li><a href="products.html">Collaboration &amp; marketing</a></li>
+          <li><a href="products.html">CRM integration</a></li>
+          <li><a href="pricing.html">Pricing &amp; bundles</a></li>
+        </ul>
+      </div>
+
+      <div class="foot">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="partners.html">Partners</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="foot">
+        <h4>Stay informed</h4>
+        <p style="margin-bottom:.9rem">Platform releases and field notes, occasionally.</p>
+        <form class="sub" novalidate>
+          <input type="email" placeholder="you@company.com" aria-label="Email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="sub__msg" role="status"></p>
+        <p style="margin-top:1.1rem"><a href="mailto:info@multycomm.com" class="link" style="color:var(--brand)"><svg><use href="#i-mail"/></svg> info@multycomm.com</a></p>
+      </div>
+    </div>
+
+    <div class="foot__base">
+      <span>© <span data-year>2026</span> MultyComm Interactive Media Private Limited</span>
+      <nav aria-label="Legal">
+        <a href="contact.html">Terms &amp; Conditions</a>
+        <a href="contact.html">Refund &amp; Cancellation Policy</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <p class="tiny" style="color:rgba(255,255,255,.3);padding-bottom:1.6rem;max-width:90ch">
+      All telecommunication lines and numbers are provided from, and with KYC done by, Government of
+      India licensed TSP / ISP / telecom operators.
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════ chat ═══════════ -->
+<div class="chat" id="chat" data-open="false">
+
+  <div class="chat__panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" aria-hidden="true">
+    <div class="chat__head">
+      <span class="chat__avatar"><img src="assets/img/logo-mark.webp" alt="" width="314" height="314" loading="lazy" decoding="async"></span>
+      <span class="chat__who">
+        <b id="chat-title">MultyComm</b>
+        <span class="chat__status"><span class="dot dot--live"></span> We'll reply within a few minutes</span>
+      </span>
+      <button class="chat__close" type="button" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="chat__body" id="chat-body">
+      <p class="chat__stamp" data-now>Just now</p>
+
+      <div class="msg">
+        <span class="chat__avatar"><img src="assets/img/logo-mark.webp" alt="" width="314" height="314" loading="lazy" decoding="async"></span>
+        <p>Hi there 👋! Welcome to the site. Let me know if you have any questions.</p>
+      </div>
+
+      <div class="chat__chips" id="chat-chips">
+        <button type="button" data-topic="pricing">Pricing &amp; bundles</button>
+        <button type="button" data-topic="whatsapp">WhatsApp campaigns</button>
+        <button type="button" data-topic="carrier">Carrier platform</button>
+        <button type="button" data-topic="support">Support hours</button>
+      </div>
+
+      <form class="chat__lead" id="chat-lead" novalidate>
+        <p>Please leave your details so we can contact you even if you are no longer on the site.</p>
+
+        <div class="field">
+          <label for="chat-name">Name</label>
+          <input id="chat-name" name="name" type="text" autocomplete="name" required>
+          <span class="field__err">Please enter your name.</span>
+        </div>
+        <div class="field">
+          <label for="chat-email">Email</label>
+          <input id="chat-email" name="email" type="email" autocomplete="email" required>
+          <span class="field__err">Please enter a valid email.</span>
+        </div>
+        <div class="field">
+          <label for="chat-phone">Phone</label>
+          <input id="chat-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="chat-msg">Message</label>
+          <textarea id="chat-msg" name="message" required></textarea>
+          <span class="field__err">Please add a message.</span>
+        </div>
+
+        <button class="btn btn--primary" type="submit">Submit</button>
+
+        <p class="chat__note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>Static rebuild — this chat has no server behind it, so nothing is sent. Reach the real
+            team at <a href="mailto:info@multycomm.com">info@multycomm.com</a>.</span>
+        </p>
+      </form>
+    </div>
+
+    <div class="chat__foot">
+      <button type="button" class="is-on" aria-pressed="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.9 9.9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg>
+        Chat
+      </button>
+      <a class="wa" href="https://wa.me/919811273194" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.53.07-.8.38-.28.3-1.05 1.02-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2 22l5.34-1.4a9.8 9.8 0 0 0 4.7 1.2h.01c5.43 0 9.85-4.42 9.85-9.86 0-2.63-1.02-5.1-2.88-6.97A9.8 9.8 0 0 0 12.04 2zm0 17.94h-.01a8.2 8.2 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.16 8.16 0 0 1-1.25-4.36c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.86 5.8 2.41a8.15 8.15 0 0 1 2.4 5.8c0 4.52-3.68 8.19-8.2 8.19z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <button class="chat__launch" type="button" aria-expanded="false" aria-controls="chat" aria-label="Open chat">
+    <span class="chat__avatar"><img src="assets/img/logo-mark.webp" alt="" width="314" height="314" loading="lazy" decoding="async"></span>
+    <span class="lbl">Let's Chat!</span>
+    <span class="chat__badge" id="chat-badge" hidden>1</span>
+  </button>
+</div>
+<!-- /chat -->
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

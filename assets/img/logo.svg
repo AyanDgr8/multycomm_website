@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="MultyComm">
+  <!-- handset, traced from the live logo mark -->
+  <rect x="9.6" y="3.4" width="18.8" height="37.2" rx="4.6"
+        stroke="var(--logo-mark, #FE6600)" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M13.9 9.2v10.4" stroke="var(--logo-mark, #FE6600)" stroke-width="2.1" stroke-linecap="round" opacity=".55"/>
+  <circle cx="19" cy="34.6" r="1.7" fill="var(--logo-mark, #FE6600)"/>
+  <!-- outbound signal, the platform half of the story -->
+  <path d="M32.4 14.6a7.4 7.4 0 0 1 0 10.5" stroke="var(--logo-arc1, #EF6F53)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M36.9 9.9a14 14 0 0 1 0 19.9" stroke="var(--logo-arc2, #D98718)" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>
+</svg>
