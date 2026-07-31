@@ -375,6 +375,72 @@
   /* ---------- year stamp ---------- */
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
+  /* ---------- service image viewer ---------- */
+  var serviceImages = $$('.flow__open');
+  if (serviceImages.length) {
+    var viewer = document.createElement('div');
+    viewer.className = 'image-viewer';
+    viewer.hidden = true;
+    viewer.setAttribute('role', 'dialog');
+    viewer.setAttribute('aria-modal', 'true');
+    viewer.setAttribute('aria-label', 'Service image viewer');
+    viewer.innerHTML =
+      '<button class="image-viewer__close" type="button" aria-label="Close image viewer">&times;</button>' +
+      '<button class="image-viewer__nav image-viewer__prev" type="button" aria-label="Previous image">&#8249;</button>' +
+      '<figure><img alt=""><figcaption></figcaption></figure>' +
+      '<button class="image-viewer__nav image-viewer__next" type="button" aria-label="Next image">&#8250;</button>';
+    document.body.appendChild(viewer);
+
+    var viewerImage = $('img', viewer);
+    var viewerCaption = $('figcaption', viewer);
+    var viewerClose = $('.image-viewer__close', viewer);
+    var viewerIndex = 0;
+    var viewerReturnFocus = null;
+
+    function showServiceImage(index) {
+      viewerIndex = (index + serviceImages.length) % serviceImages.length;
+      var link = serviceImages[viewerIndex];
+      var thumb = $('img', link);
+      viewerImage.src = link.href;
+      viewerImage.alt = thumb ? thumb.alt : '';
+      viewerCaption.textContent = thumb ? thumb.alt : '';
+    }
+
+    function openServiceViewer(index, trigger) {
+      viewerReturnFocus = trigger;
+      showServiceImage(index);
+      viewer.hidden = false;
+      document.body.classList.add('viewer-open');
+      viewerClose.focus();
+    }
+
+    function closeServiceViewer() {
+      viewer.hidden = true;
+      viewerImage.removeAttribute('src');
+      document.body.classList.remove('viewer-open');
+      if (viewerReturnFocus) viewerReturnFocus.focus();
+    }
+
+    serviceImages.forEach(function (link, index) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openServiceViewer(index, link);
+      });
+    });
+    viewerClose.addEventListener('click', closeServiceViewer);
+    $('.image-viewer__prev', viewer).addEventListener('click', function () { showServiceImage(viewerIndex - 1); });
+    $('.image-viewer__next', viewer).addEventListener('click', function () { showServiceImage(viewerIndex + 1); });
+    viewer.addEventListener('click', function (e) {
+      if (e.target === viewer) closeServiceViewer();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (viewer.hidden) return;
+      if (e.key === 'Escape') closeServiceViewer();
+      if (e.key === 'ArrowLeft') showServiceImage(viewerIndex - 1);
+      if (e.key === 'ArrowRight') showServiceImage(viewerIndex + 1);
+    });
+  }
+
   /* ==========================================================================
      chat widget
      Stands in for the Wix Chat iframe the live site embeds. Same anatomy —

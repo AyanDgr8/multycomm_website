@@ -140,6 +140,10 @@
           <span class="chip"><svg><use href="#i-layers"/></svg> Dynamic CRM</span>
           <span class="chip"><svg><use href="#i-spark"/></svg> MAVE AI</span>
         </div>
+        <div class="btn-row mt-3" data-reveal>
+          <a class="btn btn--primary" href="#dynamic-crm">See the CRM <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="contact.html">Book a walkthrough</a>
+        </div>
       </div>
       <div data-reveal>
         <div class="frame frame--wide">
@@ -150,6 +154,17 @@
     </div>
   </div>
 </section>
+
+<nav class="product-rail" aria-label="Product sections">
+  <div class="wrap product-rail__in">
+    <span>Explore</span>
+    <a href="#carrier"><svg><use href="#i-server"/></svg> Carrier</a>
+    <a href="#enterprise"><svg><use href="#i-building"/></svg> Enterprise</a>
+    <a href="#collaboration"><svg><use href="#i-share"/></svg> Omnichannel</a>
+    <a href="#dynamic-crm"><svg><use href="#i-layers"/></svg> Dynamic CRM</a>
+    <a href="#mave"><svg><use href="#i-spark"/></svg> MAVE AI</a>
+  </div>
+</nav>
 
 <!-- the three platform families -->
 <section class="section section--flush-top product-overview">
@@ -793,5 +808,48 @@
 <!-- /chat -->
 
 <script src="assets/js/site.js"></script>
+
+<script>
+window.__log=[];
+function log(s){window.__log.push(s);}
+window.addEventListener('DOMContentLoaded', function(){
+ setTimeout(function(){
+  var root=document.querySelector('[data-shots]');
+  var track=root.querySelector('[data-shots-track]');
+  var slides=root.querySelectorAll('.shot');
+  function reset(){track.scrollLeft=0;}
+  function step(label, prep, done){
+    reset(); prep();
+    track.scrollTo({left:1118, behavior:'smooth'});
+    setTimeout(function(){ log(label+' -> '+track.scrollLeft); done(); }, 1200);
+  }
+  // control: a synthetic scroller
+  var box=document.createElement('div');
+  box.style.cssText='width:200px;height:50px;overflow-x:auto;display:flex';
+  var inner=document.createElement('div'); inner.style.cssText='flex:0 0 2000px;height:20px'; box.appendChild(inner);
+  document.body.appendChild(box);
+  box.scrollTo({left:500,behavior:'smooth'});
+  setTimeout(function(){
+   log('CONTROL synthetic smooth scroll -> '+box.scrollLeft);
+   step('A snap as-is', function(){}, function(){
+    step('B snap-type none', function(){track.style.scrollSnapType='none';}, function(){
+      step('C snap-type none + stop normal', function(){
+        track.style.scrollSnapType='none';
+        slides.forEach ? null : null;
+        Array.prototype.forEach.call(slides,function(s){s.style.scrollSnapStop='normal';s.style.scrollSnapAlign='none';});
+      }, function(){
+        step('D snap restored mandatory + align start', function(){
+          track.style.scrollSnapType='x mandatory';
+          Array.prototype.forEach.call(slides,function(s){s.style.scrollSnapStop='normal';s.style.scrollSnapAlign='start';});
+        }, function(){
+          var d=document.createElement('pre');d.id='PROBE';d.textContent=window.__log.join('\n');document.body.insertBefore(d,document.body.firstChild);
+        });
+      });
+    });
+   });
+  },1200);
+ },600);
+});
+</script>
 </body>
 </html>
