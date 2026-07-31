@@ -139,9 +139,13 @@ strong { color: var(--ink-800); font-weight: 600; }
 .grid > *, .split > *, .hero__in > *, .tiers > *, .stats > *, .flow__item > * { min-width: 0; }
 
 .grid { display: grid; gap: clamp(1.1rem, .6rem + 1.4vw, 1.9rem); }
-.g-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .g-3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr)); }
 .g-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+
+@media (max-width: 699px) {
+  .g-2 { grid-template-columns: minmax(0, 1fr); }
+}
 
 .split {
   display: grid;
@@ -2173,3 +2177,910 @@ strong { color: var(--ink-800); font-weight: 600; }
   border-color: var(--brand-100);
 }
 .card--dark .crm__logo { border-color: rgba(255,255,255,.16); }
+
+/* ==========================================================================
+   Premium container treatment
+   Layered light, deeper elevation and more expressive icon tiles give every
+   reusable content surface a distinctive, polished MultyComm character.
+   ========================================================================== */
+.card, .tier, .post, .flow__item, .panel, .contact-card {
+  border-color: rgba(157,173,191,.32);
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(254,102,0,.1), transparent 42%),
+    radial-gradient(90% 80% at 0% 100%, rgba(54,76,99,.07), transparent 48%),
+    linear-gradient(145deg, rgba(255,255,255,.99), rgba(247,249,253,.94));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.95) inset,
+    0 0 0 1px rgba(255,255,255,.54) inset,
+    0 20px 50px -34px rgba(11,27,44,.42),
+    0 8px 18px -14px rgba(11,27,44,.2);
+}
+
+.card {
+  padding: clamp(1.55rem, 1rem + 1.35vw, 2.25rem);
+  border-radius: 26px;
+}
+.card::after {
+  inset: 0 14% auto;
+  height: 4px;
+  border-radius: 0 0 var(--pill) var(--pill);
+  background: linear-gradient(90deg, transparent, var(--brand) 25%, var(--coral) 70%, transparent);
+  opacity: .72;
+  transform: scaleX(.36);
+  transform-origin: center;
+}
+.card:hover {
+  transform: translateY(-9px) scale(1.012);
+  border-color: rgba(254,102,0,.38);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.95) inset,
+    0 0 0 1px rgba(255,255,255,.55) inset,
+    0 38px 72px -38px rgba(11,27,44,.48),
+    0 24px 44px -32px rgba(254,102,0,.5);
+}
+.card:hover::after { transform: scaleX(1); opacity: 1; }
+
+.card__ic {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px 18px 18px 7px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.72), transparent),
+    linear-gradient(145deg, #FFF0E4, #FFD8BD);
+  border: 1px solid rgba(254,102,0,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 14px 28px -16px rgba(254,102,0,.58);
+}
+.card__ic svg { width: 24px; height: 24px; }
+.card:hover .card__ic {
+  transform: translateY(-3px) rotate(-7deg) scale(1.08);
+  border-radius: 16px 7px 16px 16px;
+}
+.card h3 {
+  font-size: clamp(1.08rem, 1rem + .25vw, 1.27rem);
+  letter-spacing: -.025em;
+}
+.card .link {
+  align-self: flex-start;
+  transition: gap .3s var(--ease), color .3s var(--ease);
+}
+.card:hover .link { gap: .65rem; color: var(--brand-700); }
+
+.card--dark, .tier--feature {
+  border-color: rgba(255,255,255,.13);
+  background:
+    radial-gradient(90% 90% at 100% 0%, rgba(254,102,0,.2), transparent 48%),
+    radial-gradient(80% 90% at 0% 100%, rgba(54,76,99,.4), transparent 54%),
+    linear-gradient(145deg, #152E45, #071322 72%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 30px 62px -34px rgba(7,19,34,.72);
+}
+
+/* The image-backed language panel becomes a glass showcase instead of a flat
+   white block; individual feature cards remain easy to scan over the artwork. */
+.ai-language {
+  padding: clamp(2.1rem, 1rem + 4vw, 4.8rem);
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 34px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.82) 55%, rgba(255,255,255,.24) 100%),
+    url("../img/hero-languages.jpg") center / cover no-repeat;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 50px 100px -52px rgba(11,27,44,.58),
+    0 22px 52px -42px rgba(254,102,0,.52);
+}
+.ai-language::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  width: 260px;
+  aspect-ratio: 1;
+  right: -90px;
+  bottom: -110px;
+  border-radius: 50%;
+  background: rgba(254,102,0,.22);
+  filter: blur(38px);
+}
+.ai-language > div { position: relative; z-index: 1; }
+.ai-language .card {
+  border-color: rgba(255,255,255,.75);
+  background:
+    radial-gradient(100% 90% at 100% 0%, rgba(254,102,0,.11), transparent 48%),
+    rgba(255,255,255,.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 22px 46px -34px rgba(11,27,44,.48);
+  backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.cta {
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    0 60px 120px -52px rgba(7,19,34,.7),
+    0 28px 60px -46px rgba(254,102,0,.65);
+}
+
+@media (max-width: 700px) {
+  .card:hover { transform: translateY(-5px); }
+  .ai-language {
+    border-radius: 26px;
+    background:
+      linear-gradient(rgba(255,255,255,.88), rgba(255,255,255,.88)),
+      url("../img/hero-languages.jpg") center / cover no-repeat;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover { transform: none; }
+  .card:hover .card__ic { transform: none; }
+}
+
+/* ==========================================================================
+   2026 editorial refresh
+   Photo-led sections, reliable touch interaction, and less boxed-in mobile UI.
+   ========================================================================== */
+
+/* Decorative layers must never become invisible tap shields. */
+.hero__grid,
+.band__mesh,
+.orbit,
+.section::before,
+.section::after,
+.card::before,
+.card::after,
+.post::before,
+.post::after,
+.frame::before,
+.frame::after,
+.cap::before,
+.cap::after,
+.phero::before,
+.phero::after,
+.cta::before,
+.cta::after { pointer-events: none !important; }
+
+a, button, input, select, textarea { touch-action: manipulation; }
+.btn, .link, .burger, .drawer__close, .drawer nav a, .panel__head, .tier__more {
+  position: relative;
+  z-index: 5;
+  min-height: 44px;
+}
+.drawer { pointer-events: none; }
+.drawer[data-open="true"] { pointer-events: auto; }
+.drawer__panel { pointer-events: auto; }
+
+/* A human, cinematic homepage hero replaces the decorative grid aesthetic. */
+.hero {
+  min-height: min(820px, calc(100svh - 106px));
+  display: grid;
+  align-items: center;
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(5,16,31,.97) 0%, rgba(5,16,31,.88) 42%, rgba(5,16,31,.28) 72%, rgba(5,16,31,.18)),
+    url("../img/hero-unified-v2.webp") 58% center / cover no-repeat;
+}
+.hero__grid, .hero::before, .hero::after { display: none; }
+.hero h1, .hero strong { color: #fff; }
+.hero .lead { color: rgba(255,255,255,.76); }
+.hero__stats { border-top-color: rgba(255,255,255,.2); }
+.hero__stats b {
+  background-image: none;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+.hero__stats > div > span { color: rgba(255,255,255,.62); }
+.hero .btn--ghost {
+  --btn-fg: #fff;
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.08);
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+}
+.hero .console-wrap { filter: drop-shadow(0 35px 50px rgba(0,0,0,.34)); }
+
+/* Inner-page "super sections": full-bleed editorial headers with a page-specific
+   image already present in the content, rather than another pale rectangle. */
+.phero {
+  width: 100%;
+  height: calc(100svh - 114px);
+  min-height: 0;
+  max-height: calc(100svh - 114px);
+  display: grid;
+  align-items: center;
+  padding-block: clamp(2.25rem, 6vh, 5rem);
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  isolation: isolate;
+}
+.phero > .wrap {
+  width: min(var(--wrap), 100%);
+  max-height: 100%;
+}
+.phero .split { gap: clamp(1.5rem, 4vw, 4rem); }
+.phero .section-head { margin-bottom: 0; }
+.phero .frame,
+.phero .frame-stack {
+  max-height: min(58vh, 560px);
+}
+.phero .frame img {
+  max-height: min(58vh, 560px);
+  width: 100%;
+  object-fit: cover;
+}
+.phero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(5,16,31,.94), rgba(5,16,31,.68) 55%, rgba(5,16,31,.25));
+}
+.phero h1, .phero .h1 { color: #fff; max-width: 14ch; }
+.phero .lead { color: rgba(255,255,255,.78); }
+.phero .crumbs { color: rgba(255,255,255,.58); }
+.phero .crumbs b { color: rgba(255,255,255,.88); }
+.phero .crumbs a:hover { color: #fff; }
+.phero .btn--ghost {
+  --btn-fg: #fff;
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.08);
+  box-shadow: none;
+  backdrop-filter: blur(10px);
+}
+body:has(.drawer a[href="products.html"][aria-current="page"]) .phero { background-image:url("../img/hero-products-v2.webp"); }
+body:has(.drawer a[href="solutions.html"][aria-current="page"]) .phero { background-image:url("../img/hero-solutions-v2.webp"); }
+body:has(.drawer a[href="services.html"][aria-current="page"]) .phero { background-image:url("../img/hero-services-v2.webp"); background-position:center 38%; }
+body:has(.drawer a[href="about.html"][aria-current="page"]) .phero { background-image:url("../img/hero-about-v2.webp"); }
+body:has(.drawer a[href="partners.html"][aria-current="page"]) .phero { background-image:url("../img/hero-partners-v2.webp"); }
+body:has(.drawer a[href="insights.html"][aria-current="page"]) .phero { background-image:url("../img/hero-insights-v2.webp"); }
+body:has(.drawer a[href="contact.html"][aria-current="page"]) .phero { background-image:url("../img/hero-contact-v2.webp"); }
+body:has(.drawer a[href="pricing.html"][aria-current="page"]) .phero { background-image:url("../img/hero-pricing-v2.webp"); }
+
+/* Soften the repeated grid language on desktop too. */
+.section + .section { border-top: 0; }
+.card, .post, .tier, .flow__item, .contact-card {
+  border-color: transparent;
+  border-radius: clamp(18px, 2vw, 30px);
+}
+.grid { row-gap: clamp(1.5rem, 3vw, 3rem); }
+
+/* A consistent hand-off from every hero into the page body. Inline one-off
+   flush values in old fragments no longer create uneven first-section gaps. */
+.phero + .section {
+  padding-top: var(--section) !important;
+}
+
+/* Homepage flagship: the tailored platform story becomes one cinematic,
+   contained experience instead of another white split row. */
+.tailored {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+  background:
+    radial-gradient(70% 90% at 92% 0%, rgba(254,102,0,.19), transparent 60%),
+    linear-gradient(145deg, #071322, #102b45 72%, #071322);
+  overflow: hidden;
+  isolation: isolate;
+}
+.tailored::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grain);
+  opacity: .12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.tailored > .wrap {
+  width: min(1320px, 100%);
+}
+.tailored .split {
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+.tailored .frame-stack {
+  position: relative;
+}
+.tailored .frame {
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: clamp(24px, 3vw, 44px);
+  box-shadow: 0 50px 100px -44px rgba(0,0,0,.8), inset 0 1px rgba(255,255,255,.2);
+}
+.tailored .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+.tailored:hover .frame img { transform: scale(1.035); }
+.tailored .kicker { color: #FFB37E; }
+.tailored h2 { color: #fff; font-size: clamp(2.2rem, 4.4vw, 4.4rem); line-height: 1.01; }
+.tailored .lead { color: rgba(255,255,255,.7); }
+.tailored .speclist {
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .75rem;
+}
+.tailored .speclist li {
+  color: rgba(255,255,255,.82);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 14px;
+  padding: .8rem;
+  background: rgba(255,255,255,.055);
+  backdrop-filter: blur(10px);
+}
+.tailored .link { color: #FFB37E; }
+
+@media (max-width: 899px) {
+  .tailored .split { display: grid; grid-template-columns: 1fr; }
+  .tailored .frame-stack { order: 2; }
+}
+
+@media (max-height: 720px) and (min-width: 701px) {
+  .phero { padding-block: 1.5rem; }
+  .phero .crumbs { margin-bottom: .75rem; }
+  .phero .lead { font-size: .9rem; line-height: 1.5; }
+  .phero .mt-2 { margin-top: .65rem; }
+  .phero .mt-3 { margin-top: 1rem; }
+  .phero .frame,
+  .phero .frame-stack,
+  .phero .frame img { max-height: 48vh; }
+}
+
+@media (max-width: 700px) {
+  :root { --section: clamp(3.7rem, 12vw, 5.2rem); }
+  .topbar { display: none; }
+  .site-head { top: 0; }
+  .head-cta > .btn { display: none; }
+  .burger { display: inline-flex; position: relative; z-index: 92; }
+
+  .hero {
+    min-height: calc(100svh - 66px);
+    padding-block: 5.3rem 3rem;
+    background:
+      linear-gradient(180deg, rgba(5,16,31,.48) 0%, rgba(5,16,31,.75) 45%, rgba(5,16,31,.98) 100%),
+      url("../img/hero-unified-v2.webp") 69% center / cover no-repeat;
+  }
+  .hero__in { display: block; width: 100%; min-width: 0; }
+  .hero .kicker {
+    max-width: 100%;
+    white-space: normal;
+    font-size: .68rem;
+    letter-spacing: .12em;
+    line-height: 1.5;
+  }
+  .hero .h-hero {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 10.8vw, 3.3rem);
+    overflow-wrap: anywhere;
+  }
+  .hero .lead { font-size: .98rem; line-height: 1.65; }
+  .hero .btn-row {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    width: 100%;
+    max-width: calc(100vw - (2 * var(--gutter)));
+  }
+  .hero .btn { width: 100%; }
+  .hero__stats {
+    grid-template-columns: repeat(3,1fr);
+    gap: .65rem;
+    margin-top: 2rem;
+    padding-top: 1.3rem;
+  }
+  .hero__stats b { font-size: 1.15rem; }
+  .hero__stats > div > span { font-size: .66rem; line-height: 1.35; }
+  .console-wrap { display: none; }
+
+  .phero {
+    width: 100%;
+    height: calc(100svh - 66px);
+    min-height: 0;
+    max-height: calc(100svh - 66px);
+    padding-block: clamp(2.5rem, 7vh, 4.5rem) clamp(2rem, 6vh, 3.5rem);
+    align-items: end;
+    background-position: center;
+  }
+  .phero .split { display: block; }
+  .phero .frame,
+  .phero .frame-stack,
+  .phero .split > div:last-child:has(.frame) { display: none; }
+  .phero .lead {
+    font-size: clamp(.86rem, 3.5vw, .98rem);
+    line-height: 1.55;
+  }
+  .phero .lead + .lead { display: none; }
+  .phero .chips,
+  .phero div[style*="flex-wrap"] { display: none !important; }
+  .phero .btn-row { margin-top: 1.25rem; }
+  .phero::after {
+    background: linear-gradient(180deg, rgba(5,16,31,.25), rgba(5,16,31,.86) 62%, #071322);
+  }
+  .phero h1, .phero .h1 {
+    max-width: 13ch;
+    font-size: clamp(2rem, 9.4vw, 3.15rem);
+  }
+
+  .tailored {
+    padding-block: 4.25rem;
+    background:
+      linear-gradient(180deg, rgba(7,19,34,.12), #071322 78%),
+      url("../img/tailored-platform-v2.webp") 55% top / auto 58svh no-repeat,
+      #071322;
+  }
+  .tailored .split { display: block; }
+  .tailored .frame-stack { display: none; }
+  .tailored > .wrap { padding-top: 45svh; }
+  .tailored h2 { font-size: clamp(2.45rem, 11vw, 3.45rem); }
+  .tailored .speclist { grid-template-columns: 1fr; }
+
+  /* Any card which already contains a photograph becomes a poster on mobile.
+     The original image remains in the DOM for semantics and lazy loading. */
+  .cap, .post, .ind, .flow__item, .split:has(> .frame) {
+    border: 0;
+    box-shadow: none;
+  }
+  .cap { min-height: 72svh; border-radius: 28px; }
+  .cap__in { padding: 1.5rem; }
+
+  .post {
+    min-height: 420px;
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    background: #071322;
+  }
+  .post__ph { position:absolute; inset:0; height:100%; border-radius:inherit; }
+  .post__ph::after {
+    background: linear-gradient(180deg, transparent 20%, rgba(7,19,34,.94));
+    box-shadow: none;
+  }
+  .post__body { position:relative; z-index:2; padding:1.4rem; }
+  .post h3, .post__meta { color:#fff; }
+
+  .flow__item {
+    overflow: hidden;
+    padding: 0;
+    background: #071322;
+  }
+  .flow__ph { min-height: 58svh; border-radius: inherit; }
+  .flow__copy {
+    margin-top: -46%;
+    position: relative;
+    z-index: 2;
+    padding: 7rem 1.35rem 1.5rem;
+    color: rgba(255,255,255,.75);
+    background: linear-gradient(transparent,#071322 38%);
+  }
+  .flow__copy h3 { color: #fff; }
+
+  .card:not(.card--dark), .tier:not(.tier--feature), .contact-card {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    padding-inline: .25rem;
+  }
+  .section--tint, .section--warm { background: #fff; }
+  .section--tint::before, .section--warm::before { opacity: .5; }
+  .section-head { margin-bottom: 2rem; }
+  .chat { z-index: 70; }
+}
+
+/* ==========================================================================
+   product screenshot carousel  (.shots)
+   Real product screens shown in a browser-chrome frame. The track is a native
+   scroll-snap row, so touch swipe and keyboard both work with no JS; JS only
+   adds the arrows, dots, caption sync and autoplay.
+   ========================================================================== */
+.shots {
+  position: relative;
+  --shot-dur: 6500ms;
+}
+.shots__frame {
+  border-radius: clamp(14px, 1.2vw, 20px);
+  overflow: hidden;
+  background: #0C1E31;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 60px 120px -50px rgba(0,0,0,.85),
+    0 26px 60px -44px rgba(254,102,0,.45);
+}
+.shots__bar {
+  display: flex; align-items: center; gap: .42rem;
+  padding: .68rem .9rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.028));
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.shots__bar > i {
+  width: 10px; height: 10px; flex: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.22);
+}
+.shots__bar > i:nth-child(1) { background: #FF5F57; }
+.shots__bar > i:nth-child(2) { background: #FEBC2E; }
+.shots__bar > i:nth-child(3) { background: #28C840; }
+.shots__url {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-left: .7rem;
+  min-width: 0;
+  padding: .26rem .8rem;
+  border-radius: var(--pill);
+  background: rgba(0,0,0,.3);
+  border: 1px solid rgba(255,255,255,.07);
+  font-size: var(--t-xs);
+  color: rgba(255,255,255,.5);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.shots__url svg { width: 12px; height: 12px; flex: none; color: rgba(107,227,180,.9); }
+.shots__count {
+  margin-left: auto;
+  flex: none;
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,.34);
+}
+.shots__count b { color: #fff; font-weight: 700; }
+
+.shots__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.shots__track::-webkit-scrollbar { display: none; }
+.shots__track:focus-visible { outline-offset: -3px; }
+
+.shot {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  aspect-ratio: 1920 / 1097;
+  background: #0B1B2C;
+}
+.shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.shots__meta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(.7rem, .4rem + 1.4vw, 1.5rem);
+  margin-top: clamp(1.1rem, .8rem + .9vw, 1.75rem);
+}
+.shots__arrow {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.shots__arrow:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-brand);
+}
+.shots__arrow svg { width: 18px; height: 18px; }
+.shots__cap { min-height: 4.4rem; }
+.shots__cap b {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.05rem, .96rem + .42vw, 1.32rem);
+  font-weight: 700;
+  letter-spacing: -.022em;
+  color: #fff;
+}
+.shots__cap span {
+  display: block;
+  margin-top: .28rem;
+  font-size: .92rem; line-height: 1.55;
+  color: rgba(255,255,255,.62);
+  text-wrap: pretty;
+}
+
+.shots__dots {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: .42rem;
+  margin-top: clamp(1rem, .7rem + .8vw, 1.5rem);
+}
+.shots__dot {
+  position: relative;
+  width: 30px; height: 5px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pill);
+  background: rgba(255,255,255,.18);
+  cursor: pointer;
+  overflow: hidden;
+  transition: width .4s var(--ease), background .3s var(--ease);
+}
+.shots__dot:hover { background: rgba(255,255,255,.38); }
+.shots__dot.is-on { width: 58px; background: rgba(255,255,255,.24); }
+.shots__dot.is-on::after {
+  content: "";
+  position: absolute; inset: 0;
+  width: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand), var(--coral));
+  transform-origin: left;
+}
+.shots[data-playing="true"] .shots__dot.is-on::after {
+  animation: shot-fill var(--shot-dur) linear forwards;
+}
+@keyframes shot-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Extra breathing room under a shots band before the cards that explain it. */
+.band--shots .grid { margin-top: clamp(2.4rem, 1.6rem + 2.4vw, 4rem); }
+
+@media (max-width: 760px) {
+  .shots__meta { grid-template-columns: 1fr; text-align: center; }
+  .shots__meta .shots__arrow { display: none; }
+  .shots__cap { min-height: 0; }
+  .shots__url { display: none; }
+  .shots__count { margin-left: .3rem; }
+  .shots__dot { width: 22px; }
+  .shots__dot.is-on { width: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shots__dot.is-on::after { animation: none !important; }
+  .shots__arrow:hover { transform: none; }
+}
+
+/* A single still product screenshot. It keeps its own proportions — these are
+   whole app screens, so cropping them to a decorative ratio loses the point. */
+.frame--app {
+  border-radius: clamp(14px, 1.2vw, 20px);
+  background: #0B1B2C;
+  border: 1px solid rgba(11,27,44,.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 54px 100px -50px rgba(11,27,44,.6),
+    0 22px 52px -42px rgba(254,102,0,.4);
+}
+.frame--app img { height: auto; }
+
+/* A UI screenshot in a post card: crop from the top-left, where the product
+   actually is, rather than the middle of a dense dashboard. */
+.post__ph--shot { background: #0B1B2C; }
+.post__ph--shot img { object-position: left top; }
+
+/* ==========================================================================
+   Products — editorial product journey
+   ========================================================================== */
+.products-page {
+  --product-navy: #071522;
+  --product-blue: #0d2a43;
+}
+.products-page .phero .split {
+  display: block;
+}
+.products-page .phero .split > div:first-child {
+  width: min(690px, 58%);
+}
+.products-page .phero .split > div:last-child {
+  display: none;
+}
+.products-page .phero .frame {
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1deg);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 28px;
+  box-shadow: 0 55px 100px -45px rgba(0,0,0,.85), 0 0 0 8px rgba(255,255,255,.035);
+}
+.products-page .phero .frame img { min-height: 300px; object-fit: cover; }
+.products-page .phero .chip {
+  color: rgba(255,255,255,.8);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(7,19,34,.38);
+  box-shadow: inset 0 1px rgba(255,255,255,.1);
+  backdrop-filter: blur(12px);
+}
+
+.product-rail {
+  position: sticky;
+  top: 74px;
+  z-index: 75;
+  background: rgba(7,21,34,.9);
+  border-block: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+.product-rail__in {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.product-rail__in::-webkit-scrollbar { display: none; }
+.product-rail__in > span {
+  margin-right: .45rem;
+  color: rgba(255,255,255,.42);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.product-rail a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: .46rem;
+  padding: .65rem .9rem;
+  border: 1px solid transparent;
+  border-radius: var(--pill);
+  color: rgba(255,255,255,.72);
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+}
+.product-rail a svg { width: 15px; height: 15px; color: #FF9A52; }
+.product-rail a:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+.product-rail a[aria-current="true"] {
+  color: #fff;
+  border-color: rgba(255,154,82,.32);
+  background: linear-gradient(120deg, rgba(254,102,0,.24), rgba(255,255,255,.07));
+  box-shadow: inset 0 1px rgba(255,255,255,.12), 0 10px 24px -18px rgba(254,102,0,.8);
+}
+
+.product-overview { padding-top: clamp(4rem, 7vw, 7rem) !important; }
+.product-overview > .wrap > .g-3:first-child .card {
+  min-height: 280px;
+  padding: clamp(1.5rem, 2.5vw, 2.2rem);
+  background: linear-gradient(145deg, #fff, #f4f7fb);
+  border: 0;
+  box-shadow: 0 28px 70px -45px rgba(7,19,34,.5), inset 0 1px #fff;
+}
+.product-overview > .wrap > .g-3:first-child .card:nth-child(2) {
+  transform: translateY(-22px);
+  background: linear-gradient(145deg, #102c46, #071522);
+}
+.product-overview > .wrap > .g-3:first-child .card:nth-child(2) h3 { color: #fff; }
+.product-overview > .wrap > .g-3:first-child .card:nth-child(2) p { color: rgba(255,255,255,.65); }
+.product-overview > .wrap > .g-3:first-child .card:nth-child(2) .card__num { color: rgba(255,255,255,.08); }
+
+.products-page .stats--light {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 0;
+  border-radius: 28px;
+  background:
+    radial-gradient(80% 160% at 0% 100%, rgba(254,102,0,.13), transparent 62%),
+    linear-gradient(145deg, #f8fafc, #fff);
+  box-shadow: 0 28px 70px -50px rgba(7,19,34,.45);
+}
+.products-page .stats--light .stat { border-color: rgba(11,27,44,.08); }
+
+.product-story {
+  scroll-margin-top: 160px;
+  padding: clamp(1.1rem, 2.5vw, 2.2rem);
+  border-radius: clamp(26px, 3vw, 42px);
+  background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(244,247,251,.72));
+  box-shadow: 0 35px 90px -58px rgba(7,19,34,.55), inset 0 1px #fff;
+}
+.product-story .frame {
+  border-radius: clamp(20px, 2.3vw, 32px);
+  box-shadow: 0 35px 70px -42px rgba(7,19,34,.62);
+}
+.product-story .frame img { transition: transform 1.1s var(--ease-out), filter .6s var(--ease); }
+.product-story:hover .frame img { transform: scale(1.035); filter: saturate(1.12) contrast(1.04); }
+.product-story .h2 { font-size: clamp(2.2rem, 4vw, 3.8rem); }
+
+.product-chapter {
+  position: relative;
+  overflow: hidden;
+}
+.product-chapter::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  aspect-ratio: 1;
+  right: -220px;
+  top: -220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254,102,0,.13), transparent 68%);
+  pointer-events: none;
+}
+.product-chapter--collab {
+  background:
+    radial-gradient(65% 90% at 4% 15%, rgba(254,102,0,.08), transparent 64%),
+    #fff;
+}
+
+.products-page .panel {
+  border: 1px solid rgba(11,27,44,.07);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px -48px rgba(7,19,34,.55), inset 0 1px #fff;
+}
+.products-page .panel__head { padding: 1.2rem clamp(1.1rem, 2vw, 1.7rem); }
+.products-page .panel__head:hover { background: linear-gradient(90deg, var(--brand-050), #fff); }
+.products-page .panel__body .speclist li {
+  padding: .5rem .65rem;
+  border-radius: 10px;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.products-page .panel__body .speclist li:hover {
+  background: var(--brand-050);
+  transform: translateX(2px);
+}
+
+.products-page .band--shots {
+  padding-block: clamp(5rem, 9vw, 9rem);
+  background:
+    radial-gradient(65% 80% at 85% 5%, rgba(254,102,0,.18), transparent 62%),
+    linear-gradient(145deg, #0c2942, #06121f 68%);
+}
+.products-page .band--shots .section-head { margin-bottom: clamp(2.6rem, 5vw, 4.7rem); }
+.products-page .band--shots .shots {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+}
+.products-page #mave {
+  background:
+    radial-gradient(55% 80% at 100% 15%, rgba(254,102,0,.18), transparent 65%),
+    linear-gradient(180deg, #fff8f2, #fff);
+}
+.products-page #mave .frame--app {
+  transform: perspective(1400px) rotateX(1.5deg);
+  box-shadow: 0 70px 120px -65px rgba(7,19,34,.75), 0 30px 70px -55px rgba(254,102,0,.7);
+}
+
+@media (max-width: 900px) {
+  .product-rail { top: 66px; }
+  .product-overview > .wrap > .g-3:first-child .card:nth-child(2) { transform: none; }
+  .product-story { padding: 1rem; }
+}
+
+@media (max-width: 700px) {
+  .products-page .phero .split > div:first-child { width: 100%; }
+  .products-page .phero .frame { display: none; }
+  .product-rail__in { min-height: 58px; padding-right: var(--gutter); }
+  .product-rail__in > span { display: none; }
+  .product-rail a { min-height: 40px; padding: .55rem .75rem; }
+  .product-overview { padding-top: 3.7rem !important; }
+  .product-overview > .wrap > .g-3:first-child { display: grid; grid-template-columns: 1fr; }
+  .product-overview > .wrap > .g-3:first-child .card {
+    min-height: 0;
+    padding: 1.4rem;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #f8fafc, #fff);
+    box-shadow: 0 22px 55px -45px rgba(7,19,34,.55);
+  }
+  .product-overview > .wrap > .g-3:first-child .card:nth-child(2) {
+    background: linear-gradient(145deg, #102c46, #071522);
+  }
+  .product-story { display: grid; border-radius: 26px; }
+  .product-story .frame { min-height: 54svh; }
+  .product-story .h2 { font-size: clamp(2.2rem, 11vw, 3.25rem); }
+  .products-page .panel { border-radius: 18px; }
+  .products-page .panel__t span { display: none; }
+  .products-page .panel__count { margin-left: .35rem; }
+  .products-page .band--shots { padding-block: 4.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-page .phero .frame,
+  .products-page #mave .frame--app { transform: none; }
+  .product-story:hover .frame img { transform: none; }
+}

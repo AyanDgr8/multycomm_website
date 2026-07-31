@@ -3,6 +3,7 @@
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var smooth  = 'scrollBehavior' in document.documentElement.style;
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -24,6 +25,28 @@
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
   onScroll();
+
+  /* ---------- products journey rail ---------- */
+  var productLinks = $$('.product-rail a[href^="#"]');
+  if (productLinks.length && 'IntersectionObserver' in window) {
+    var productMap = {};
+    productLinks.forEach(function (link) {
+      var target = $(link.getAttribute('href'));
+      if (target) productMap[target.id] = link;
+    });
+    var productSpy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || !productMap[entry.target.id]) return;
+        productLinks.forEach(function (link) { link.removeAttribute('aria-current'); });
+        var active = productMap[entry.target.id];
+        active.setAttribute('aria-current', 'true');
+        if (window.innerWidth < 900) {
+          active.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    }, { rootMargin: '-28% 0px -58% 0px', threshold: 0 });
+    Object.keys(productMap).forEach(function (id) { productSpy.observe($('#' + id)); });
+  }
 
   /* ---------- mobile drawer ---------- */
   var burger = $('.burger');
@@ -150,6 +173,136 @@
       threads[idx].classList.add('is-active');
     }, 2600);
   }
+
+  /* ---------- screenshot carousel ----------
+     The track is a scroll-snap row, so swipe and native scrolling already work.
+     This adds arrows, dots, the caption/counter sync and a gentle autoplay. */
+  $$('[data-shots]').forEach(function (root) {
+    var track = $('[data-shots-track]', root);
+    if (!track) return;
+    var slides = $$('.shot', track);
+    if (slides.length < 2) return;
+
+    var dotsWrap = $('[data-shots-dots]', root);
+    var capT  = $('[data-shots-title]', root);
+    var capN  = $('[data-shots-note]', root);
+    var idxEl = $('[data-shots-index]', root);
+    var totEl = $('[data-shots-total]', root);
+    var delay = parseInt(root.dataset.shots, 10) || 6500;
+    var timer = null;
+    var i = 0;
+
+    root.style.setProperty('--shot-dur', delay + 'ms');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    if (totEl) totEl.textContent = pad(slides.length);
+
+    var dots = slides.map(function (slide, n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'shots__dot';
+      b.setAttribute('aria-label', 'Screen ' + (n + 1) + ' of ' + slides.length + ': ' + (slide.dataset.title || ''));
+      b.addEventListener('click', function () { go(n); restart(); });
+      if (dotsWrap) dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function paint(n) {
+      i = n;
+      dots.forEach(function (d, k) {
+        d.classList.toggle('is-on', k === n);
+        if (k === n) d.setAttribute('aria-current', 'true');
+        else d.removeAttribute('aria-current');
+      });
+      var s = slides[n];
+      if (capT) capT.textContent = s.dataset.title || '';
+      if (capN) capN.textContent = s.dataset.note || '';
+      if (idxEl) idxEl.textContent = pad(n + 1);
+    }
+
+    // while a programmatic scroll is in flight the intermediate scroll events
+    // are ours, not the reader's — ignore them so the caption doesn't flicker
+    // through every slide it passes on the way to the one that was asked for
+    var lock = false;
+    var lockT = null;
+
+    function go(n) {
+      n = ((n % slides.length) + slides.length) % slides.length;
+      var x = slides[n].offsetLeft - slides[0].offsetLeft;
+      lock = true;
+      clearTimeout(lockT);
+      lockT = setTimeout(function () { lock = false; }, 900);
+      if (smooth && !reduced) track.scrollTo({ left: x, behavior: 'smooth' });
+      else track.scrollLeft = x;
+      paint(n);
+    }
+
+    function play() {
+      if (reduced || timer) return;
+      root.setAttribute('data-playing', 'true');
+      timer = setInterval(function () { go(i + 1); }, delay);
+    }
+    function pause() {
+      clearInterval(timer);
+      timer = null;
+      root.setAttribute('data-playing', 'false');
+    }
+    // restart so the dot's fill animation lines up with the new interval
+    function restart() { if (timer) { pause(); play(); } }
+
+    $$('[data-shots-prev]', root).forEach(function (b) {
+      b.addEventListener('click', function () { go(i - 1); restart(); });
+    });
+    $$('[data-shots-next]', root).forEach(function (b) {
+      b.addEventListener('click', function () { go(i + 1); restart(); });
+    });
+
+    track.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      go(i + (e.key === 'ArrowRight' ? 1 : -1));
+      restart();
+    });
+
+    // follow a swipe or a trackpad scroll back into the caption and dots
+    var scrolling = false;
+    track.addEventListener('scroll', function () {
+      if (scrolling) return;
+      scrolling = true;
+      requestAnimationFrame(function () {
+        scrolling = false;
+        var n = Math.round(track.scrollLeft / track.clientWidth);
+        if (lock) { if (n === i) { lock = false; clearTimeout(lockT); } return; }
+        if (n !== i && slides[n]) paint(n);
+      });
+    }, { passive: true });
+
+    root.addEventListener('pointerenter', pause);
+    root.addEventListener('pointerleave', play);
+    root.addEventListener('focusin', pause);
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) play();
+    });
+
+    paint(0);
+
+    if ('IntersectionObserver' in window) {
+      var loaded = false;
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) { pause(); return; }
+          // off-screen slides never intersect the viewport horizontally, so
+          // promote them once the carousel itself is in view
+          if (!loaded) {
+            loaded = true;
+            $$('img[loading="lazy"]', track).forEach(function (img) { img.loading = 'eager'; });
+          }
+          play();
+        });
+      }, { threshold: 0.35 }).observe(root);
+    } else {
+      play();
+    }
+  });
 
   /* ---------- marquee: duplicate the track so the loop is seamless ---------- */
   $$('.marquee__track').forEach(function (track) {

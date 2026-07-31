@@ -1,10 +1,7 @@
-<main id="main">
+<main id="main" class="products-page">
 
 <section class="phero">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="index.html">Home</a> <svg><use href="#i-chev" style="transform:rotate(-90deg);transform-origin:center"/></svg> <b>Products</b>
-    </nav>
     <div class="split split--wide-left">
       <div>
         <p class="kicker" data-reveal>Unifying &amp; simplifying UCaaS, CX and CCaaS</p>
@@ -18,8 +15,12 @@
         <div style="display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.8rem" data-reveal>
           <span class="chip"><svg><use href="#i-server"/></svg> Carrier platforms</span>
           <span class="chip"><svg><use href="#i-building"/></svg> Enterprise platforms</span>
-          <span class="chip"><svg><use href="#i-share"/></svg> Collaboration &amp; marketing</span>
-          <span class="chip"><svg><use href="#i-plug"/></svg> CRM integration</span>
+          <span class="chip"><svg><use href="#i-layers"/></svg> Dynamic CRM</span>
+          <span class="chip"><svg><use href="#i-spark"/></svg> MAVE AI</span>
+        </div>
+        <div class="btn-row mt-3" data-reveal>
+          <a class="btn btn--primary" href="#dynamic-crm">See the CRM <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="contact.html">Book a walkthrough</a>
         </div>
       </div>
       <div data-reveal>
@@ -32,8 +33,19 @@
   </div>
 </section>
 
+<nav class="product-rail" aria-label="Product sections">
+  <div class="wrap product-rail__in">
+    <span>Explore</span>
+    <a href="#carrier"><svg><use href="#i-server"/></svg> Carrier</a>
+    <a href="#enterprise"><svg><use href="#i-building"/></svg> Enterprise</a>
+    <a href="#collaboration"><svg><use href="#i-share"/></svg> Omnichannel</a>
+    <a href="#dynamic-crm"><svg><use href="#i-layers"/></svg> Dynamic CRM</a>
+    <a href="#mave"><svg><use href="#i-spark"/></svg> MAVE AI</a>
+  </div>
+</nav>
+
 <!-- the three platform families -->
-<section class="section section--flush-top">
+<section class="section section--flush-top product-overview">
   <div class="wrap">
     <div class="grid g-3" style="margin-bottom:clamp(2.4rem,1.6rem+2vw,3.6rem)">
       <div class="card" data-reveal>
@@ -59,8 +71,27 @@
       </div>
     </div>
 
+    <div class="stats stats--light" style="margin-bottom:clamp(2.4rem,1.6rem+2vw,3.6rem)">
+      <div class="stat" data-reveal>
+        <b><span data-count="99.999" data-suffix="%">99.999%</span></b>
+        <span>Availability, carrier and enterprise alike</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="84" data-suffix="">84</span></b>
+        <span>Documented capabilities across the three stacks</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="88" data-suffix="">88</span></b>
+        <span>Languages translated and transcribed in-call</span>
+      </div>
+      <div class="stat" data-reveal>
+        <b><span data-count="18" data-suffix="">18</span></b>
+        <span>Social and messaging channels in one queue</span>
+      </div>
+    </div>
+
     <!-- carrier -->
-    <div class="split split--wide-right" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
+    <div class="split split--wide-right product-story" id="carrier" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
       <div data-reveal>
         <div class="frame frame--wide">
           <img src="assets/img/prod-carrier.jpg" width="1200" height="760" loading="lazy"
@@ -113,9 +144,9 @@
 </section>
 
 <!-- enterprise -->
-<section class="section section--tint">
+<section class="section section--tint product-chapter" id="enterprise">
   <div class="wrap">
-    <div class="split split--wide-left" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
+    <div class="split split--wide-left product-story" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
       <div>
         <p class="kicker" data-reveal>IVR · conferencing · meetings · dialers</p>
         <h2 class="h2" data-reveal>Enterprise platforms</h2>
@@ -201,9 +232,9 @@
 </section>
 
 <!-- collaboration -->
-<section class="section">
+<section class="section product-chapter product-chapter--collab" id="collaboration">
   <div class="wrap">
-    <div class="split split--wide-right" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
+    <div class="split split--wide-right product-story" style="margin-bottom:clamp(2rem,1.2rem+2vw,3rem)">
       <div data-reveal>
         <div class="frame frame--wide">
           <img src="assets/img/prod-collab.jpg" width="1200" height="760" loading="lazy"
@@ -265,6 +296,165 @@
   </div>
 </section>
 
+<!-- Dynamic CRM — the product, in its own screenshots -->
+<section class="section band band--shots" id="dynamic-crm">
+  <div class="band__mesh"></div>
+  <div class="wrap">
+    <div class="section-head" style="max-width:60ch">
+      <p class="kicker kicker--dark" data-reveal>MultyComm Dynamic CRM</p>
+      <h2 class="h2" data-reveal>This is what our CRM looks like</h2>
+      <p class="lead mt-2" data-reveal>
+        Not a mock-up and not stock art — every screen below is the real product. The lead desk, the
+        record view, the field builder and the modules around them all run on the same platform as
+        your voice, so a call, a task and a customer record are never three different systems.
+      </p>
+    </div>
+
+    <div class="shots" data-shots="6500" data-playing="false" data-reveal>
+      <div class="shots__frame">
+        <div class="shots__bar">
+          <i></i><i></i><i></i>
+          <span class="shots__url"><svg><use href="#i-lock"/></svg> crm.multycomm.com</span>
+          <span class="shots__count"><b data-shots-index>01</b> / <span data-shots-total>09</span></span>
+        </div>
+
+        <div class="shots__track" data-shots-track tabindex="0" role="group"
+             aria-roledescription="carousel" aria-label="MultyComm Dynamic CRM screens">
+
+          <figure class="shot" data-title="One workspace"
+                  data-note="Leads, teams, conversations and customer insight in a single place, so nothing gets missed and every opportunity keeps moving.">
+            <img src="assets/img/dynamic-crm/01.jpg" width="1920" height="1097" loading="eager" decoding="async"
+                 alt="MultyComm Dynamic CRM workspace entry screen with a business-at-a-glance dashboard showing total leads, conversions and pipeline value.">
+          </figure>
+
+          <figure class="shot" data-title="Lead dashboard"
+                  data-note="Total leads, schedulers, the 30-day creation trend, agent performance and incoming leads — live, on one command centre.">
+            <img src="assets/img/dynamic-crm/02.jpg" width="1920" height="1097" loading="eager" decoding="async"
+                 alt="Lead dashboard with KPI tiles, a 30-day lead creation trend chart, agent performance table and an incoming leads panel.">
+          </figure>
+
+          <figure class="shot" data-title="Customer records"
+                  data-note="Sort by requirement, bulk-assign to a user and click-to-call any row — the dialer is in the table, not in another tab.">
+            <img src="assets/img/dynamic-crm/03.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Customer relationship management table listing leads with assigned agent, schedule, email and a call button on every row.">
+          </figure>
+
+          <figure class="shot" data-title="The record view"
+                  data-note="Every contact field, the tasks linked to it, and an update history that records who changed what, and when.">
+            <img src="assets/img/dynamic-crm/06.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Edit record screen showing contact details, a call customer button, linked work and a timestamped update history.">
+          </figure>
+
+          <figure class="shot" data-title="Field builder"
+                  data-note="47 fields across 7 sections — define, group and reorder them yourself. No developer, no release, no ticket.">
+            <img src="assets/img/dynamic-crm/08.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="CRM field form builder showing sections on the left and the full field formation with types on the right.">
+          </figure>
+
+          <figure class="shot" data-title="Task management"
+                  data-note="Plan, assign, track, remind, approve, escalate and report — on a board that follows your own workflow states.">
+            <img src="assets/img/dynamic-crm/09.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Task management board with approved, completed and cancelled columns of task cards, each with owner, priority and history.">
+          </figure>
+
+          <figure class="shot" data-title="Reminders and alerts"
+                  data-note="Upcoming reminders, task notifications and freshly arrived leads land together, so a follow-up is never someone's memory.">
+            <img src="assets/img/dynamic-crm/07.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Screen combining upcoming reminders, a notifications feed of task alerts and an incoming leads panel.">
+          </figure>
+
+          <figure class="shot" data-title="Expense management"
+                  data-note="Agent-wise reimbursements with pending and settled totals, draft expense capture and the expense mix behind them.">
+            <img src="assets/img/dynamic-crm/04.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Reimbursement report with live totals, pending and paid amounts, an expense entry form and an expense mix pie chart.">
+          </figure>
+
+          <figure class="shot" data-title="Inventory management"
+                  data-note="Item and category master, inward, outward and loss registers, live stock, valuation and KPI reporting.">
+            <img src="assets/img/dynamic-crm/05.jpg" width="1920" height="1097" loading="lazy" decoding="async"
+                 alt="Inventory management dashboard with total inventory value, stock alerts, stock by category and top high-value items.">
+          </figure>
+
+        </div>
+      </div>
+
+      <div class="shots__meta">
+        <button class="shots__arrow" type="button" data-shots-prev aria-label="Previous screen">
+          <svg style="transform:rotate(90deg)"><use href="#i-chev"/></svg>
+        </button>
+        <p class="shots__cap">
+          <b data-shots-title>One workspace</b>
+          <span data-shots-note>Leads, teams, conversations and customer insight in a single place, so nothing gets missed and every opportunity keeps moving.</span>
+        </p>
+        <button class="shots__arrow" type="button" data-shots-next aria-label="Next screen">
+          <svg style="transform:rotate(-90deg)"><use href="#i-chev"/></svg>
+        </button>
+      </div>
+
+      <div class="shots__dots" data-shots-dots></div>
+    </div>
+
+    <div class="grid g-3">
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-layers"/></svg></span>
+        <h3>Built around your data</h3>
+        <p>Sections, custom fields and dispositions are yours to define — contact details, event and
+           requirement, stage and pipeline, tags and classification, whatever the business actually
+           sells.</p>
+      </div>
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-phone"/></svg></span>
+        <h3>The dialer lives inside it</h3>
+        <p>Click-to-call from any record or list row, with recordings, dispositions and agent activity
+           written back automatically — no tab-switching and nothing logged by hand.</p>
+      </div>
+      <div class="card card--dark" data-reveal>
+        <span class="card__ic"><svg><use href="#i-shield"/></svg></span>
+        <h3>Role-scoped from the top down</h3>
+        <p>Super admin, business head, team lead and agent each see their own scope of records,
+           reports and reimbursements — and every edit keeps an attributable history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAVE — our AI -->
+<section class="section section--warm" id="mave">
+  <div class="wrap">
+    <div class="section-head" style="max-width:64ch">
+      <p class="kicker" data-reveal>MAVE · our AI</p>
+      <h2 class="h2" data-reveal>MAVE listens to every call, then tells you <span class="mark">what happened</span></h2>
+      <p class="lead mt-2" data-reveal>
+        MAVE is MultyComm's own voice-intelligence assistant. Point it at a batch of recordings or let
+        it run alongside the queue: it transcribes the conversation in the language it was spoken in,
+        separates the speakers, scores the call against your rulebook and hands the agent the next
+        reply — instead of leaving a supervisor to sample four calls a week and hope.
+      </p>
+    </div>
+
+    <div class="frame frame--app" data-reveal>
+      <img src="assets/img/maveai/01.png" width="1915" height="1035" loading="lazy" decoding="async"
+           alt="MAVE, the MultyComm AI assistant: batch audio transcription on the left, and on the right a speaker-separated conversation transcript, a call quality score and the AI Prompter drafting the next reply.">
+    </div>
+
+    <ul class="speclist speclist--3 mt-3" data-reveal>
+      <li><svg><use href="#i-check"/></svg> Batch audio transcription — MP3, WAV, M4A, FLAC, OGG, WebM</li>
+      <li><svg><use href="#i-check"/></svg> Speaker-separated, timestamped transcripts</li>
+      <li><svg><use href="#i-check"/></svg> Language auto-detect, or pin it for better accuracy</li>
+      <li><svg><use href="#i-check"/></svg> Sentiment scored across the whole conversation</li>
+      <li><svg><use href="#i-check"/></svg> Call quality scored against your own rulebook</li>
+      <li><svg><use href="#i-check"/></svg> Business info extracted — decision, interest, timeline</li>
+      <li><svg><use href="#i-check"/></svg> AI Prompter drafts the next reply, with a confidence score</li>
+      <li><svg><use href="#i-check"/></svg> Training and config from the same console</li>
+      <li><svg><use href="#i-check"/></svg> Every transcript and analysis exportable as CSV</li>
+    </ul>
+
+    <p class="mt-3" data-reveal>
+      <a class="link" href="insights.html">Read what MAVE changes for a contact centre <svg><use href="#i-arrow"/></svg></a>
+    </p>
+  </div>
+</section>
+
 <!-- CRM integration -->
 <section class="section band">
   <div class="band__mesh"></div>
@@ -273,8 +463,9 @@
       <p class="kicker kicker--dark" data-reveal>CRM integration</p>
       <h2 class="h2" data-reveal>Click-to-call where your team already works</h2>
       <p class="lead mt-2" data-reveal>
-        The dialer is embedded in the CRM, so there is no tab-switching and nothing to log by hand.
-        Call recordings, agent activity and customer interaction details sync back automatically.
+        Already standardised on someone else's CRM? The same dialer embeds there. No tab-switching
+        and nothing to log by hand — call recordings, agent activity and customer interaction details
+        sync back automatically.
       </p>
     </div>
 
