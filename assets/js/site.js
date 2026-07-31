@@ -306,7 +306,12 @@
 
   /* ---------- marquee: duplicate the track so the loop is seamless ---------- */
   $$('.marquee__track').forEach(function (track) {
-    track.innerHTML += track.innerHTML;
+    Array.prototype.slice.call(track.children).forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('alt');
+      track.appendChild(clone);
+    });
   });
 
   /* ---------- forms: validate locally, then explain there is no backend ---------- */
