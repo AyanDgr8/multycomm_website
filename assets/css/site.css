@@ -2354,6 +2354,15 @@ a, button, input, select, textarea { touch-action: manipulation; }
 .drawer[data-open="true"] { pointer-events: auto; }
 .drawer__panel { pointer-events: auto; }
 
+/* The chat stack is a fixed column of [panel, launcher]. A closed panel is only
+   visibility:hidden, so it keeps its full 370x610 layout box — which made .chat
+   itself an invisible tap shield over the bottom-right corner of every page.
+   On a phone that box is most of the screen, so nothing under it was clickable.
+   Let taps fall through the container and land only on its real controls. */
+.chat { pointer-events: none; }
+.chat__launch,
+.chat__panel { pointer-events: auto; }
+
 /* A human, cinematic homepage hero replaces the decorative grid aesthetic. */
 .hero {
   min-height: min(820px, calc(100svh - 106px));
@@ -2634,7 +2643,10 @@ body:has(.drawer a[href="pricing.html"][aria-current="page"]) .phero { backgroun
     overflow: hidden;
     background: #071322;
   }
-  .post__ph { position:absolute; inset:0; height:100%; border-radius:inherit; }
+  /* aspect-ratio must be cleared here: with a definite height (the poster's
+     420px) and an auto width, the 4/3 ratio wins over inset:0 and blows the
+     photo out to 560px — a 1.6x zoom whose right third is clipped away. */
+  .post__ph { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; border-radius:inherit; }
   .post__ph::after {
     background: linear-gradient(180deg, transparent 20%, rgba(7,19,34,.94));
     box-shadow: none;
@@ -2828,7 +2840,22 @@ body:has(.drawer a[href="pricing.html"][aria-current="page"]) .phero { backgroun
 /* Extra breathing room under a shots band before the cards that explain it. */
 .band--shots .grid { margin-top: clamp(2.4rem, 1.6rem + 2.4vw, 4rem); }
 
+/* The arrows are optional markup. With the caption as the only child, stop the
+   three-column grid from stranding it in the narrow first column. */
+.shots__meta:not(:has(.shots__arrow)) {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: center;
+}
+
 @media (max-width: 760px) {
+  /* A 1920px-wide app screen scaled into a phone renders the CRM's own type at
+     about four pixels — the section claims "this is what our CRM looks like"
+     and then shows a smudge. Portrait frame, top-left anchored: the same
+     screenshot arrives ~2.4x larger, with the nav, headings and first columns
+     readable, and the full screen is still one landscape rotation away. */
+  .shot { aspect-ratio: 4 / 5; }
+  .shot img { object-position: top left; }
+
   .shots__meta { grid-template-columns: 1fr; text-align: center; }
   .shots__meta .shots__arrow { display: none; }
   .shots__cap { min-height: 0; }
@@ -2860,6 +2887,14 @@ body:has(.drawer a[href="pricing.html"][aria-current="page"]) .phero { backgroun
    actually is, rather than the middle of a dense dashboard. */
 .post__ph--shot { background: #0B1B2C; }
 .post__ph--shot img { object-position: left top; }
+
+/* Keeping a whole app screen's proportions stops working at phone width — the
+   MAVE console lands 190px tall and reads as a grey smudge. Crop it the way
+   .post__ph--shot and .shot are cropped: top-left, where the product is. */
+@media (max-width: 700px) {
+  .frame--app { aspect-ratio: 4 / 5; }
+  .frame--app img { height: 100%; object-fit: cover; object-position: top left; }
+}
 
 /* ==========================================================================
    Products — editorial product journey
@@ -3071,7 +3106,11 @@ body:has(.drawer a[href="pricing.html"][aria-current="page"]) .phero { backgroun
     background: linear-gradient(145deg, #102c46, #071522);
   }
   .product-story { display: grid; border-radius: 26px; }
-  .product-story .frame { min-height: 54svh; }
+  /* A min-height on a box that also carries an aspect-ratio makes the ratio
+     resolve the width instead: 54svh of height turned these into 729px-wide
+     frames inside a 316px column, so each photo showed at 2.3x with its right
+     half cut off. Width first, then let 16/10 give the height. */
+  .product-story .frame { width: 100%; min-height: 0; }
   .product-story .h2 { font-size: clamp(2.2rem, 11vw, 3.25rem); }
   .products-page .panel { border-radius: 18px; }
   .products-page .panel__t span { display: none; }
