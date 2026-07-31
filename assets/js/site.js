@@ -477,6 +477,10 @@
       pricing: 'pricing.html', whatsapp: 'products.html',
       carrier: 'products.html', support: 'services.html'
     };
+    var LINK_LABELS = {
+      pricing: 'View pricing bundles', whatsapp: 'Explore WhatsApp tools',
+      carrier: 'View carrier platform', support: 'View support services'
+    };
 
     // keep new nodes above the lead form while it exists; append once it's gone.
     // keepScroll leaves the viewport where it is, for trailing bits like the
@@ -539,24 +543,54 @@
       }
     } catch (e) {}
 
-    if (chips) {
-      chips.addEventListener('click', function (e) {
+    function bindTopicChips(topicChips) {
+      topicChips.addEventListener('click', function (e) {
         var btn = e.target.closest('button[data-topic]');
         if (!btn) return;
         var topic = btn.dataset.topic;
+        $$('button', topicChips).forEach(function (item) { item.disabled = true; });
+        btn.classList.add('is-selected');
         addMsg(btn.textContent.trim(), true);
-        chips.remove();
+        topicChips.classList.add('is-leaving');
+        setTimeout(function () { topicChips.remove(); }, reduced ? 0 : 180);
         var typing = addTyping();
         setTimeout(function () {
           typing.remove();
-          addMsg(REPLIES[topic], false);
+          var answer = addMsg(REPLIES[topic], false);
           var more = document.createElement('div');
-          more.className = 'chat__chips';
-          more.innerHTML = '<a class="btn btn--primary btn--sm" href="' + LINKS[topic] + '">Open the page</a>';
+          more.className = 'chat__answer-actions';
+          more.innerHTML =
+            '<a class="chat__answer-link" href="' + LINKS[topic] + '">' + LINK_LABELS[topic] +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>' +
+            '<button class="chat__ask-again" type="button">Ask another question</button>';
           place(more, true);
+          $('.chat__ask-again', more).addEventListener('click', function () {
+            more.remove();
+            var fresh = document.createElement('div');
+            fresh.className = 'chat__chips';
+            fresh.innerHTML =
+              '<button type="button" data-topic="pricing">Pricing &amp; bundles</button>' +
+              '<button type="button" data-topic="whatsapp">WhatsApp campaigns</button>' +
+              '<button type="button" data-topic="carrier">Carrier platform</button>' +
+              '<button type="button" data-topic="support">Support hours</button>';
+            place(fresh, true);
+            bindTopicChips(fresh);
+            requestAnimationFrame(function () {
+              fresh.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest' });
+              var firstTopic = $('button', fresh);
+              if (firstTopic) firstTopic.focus({ preventScroll: true });
+            });
+          });
+          requestAnimationFrame(function () {
+            body.scrollTo({
+              top: Math.max(0, answer.offsetTop - body.offsetTop - 12),
+              behavior: reduced ? 'auto' : 'smooth'
+            });
+          });
         }, reduced ? 60 : 1100);
       });
     }
+    if (chips) bindTopicChips(chips);
 
     if (lead) {
       lead.addEventListener('submit', function (e) {

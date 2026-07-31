@@ -19,11 +19,15 @@
 
       <!-- form -->
       <div data-reveal>
-        <div class="card" style="padding:clamp(1.6rem,1.2rem+1.4vw,2.4rem)">
-          <h2 class="h3" style="margin-bottom:.5rem">Send us a message</h2>
-          <p class="small" style="color:var(--muted);margin-bottom:1.6rem">
-            Tell us what you're running today and what you'd like it to do instead.
-          </p>
+        <div class="card contact-form-panel">
+          <div class="contact-form__head">
+            <span class="contact-form__icon"><svg><use href="#i-mail"/></svg></span>
+            <div>
+              <p class="contact-form__eyebrow">Request a consultation</p>
+              <h2 class="h3">Send us a message</h2>
+              <p>Tell us what you're running today and what you'd like it to do instead.</p>
+            </div>
+          </div>
 
           <form class="form" data-validate novalidate>
             <div class="form__ok">
@@ -91,7 +95,7 @@
                 goes nowhere — no data leaves your machine.</span>
             </p>
 
-            <button class="btn btn--primary btn--lg" type="submit">Send <svg><use href="#i-arrow"/></svg></button>
+            <button class="btn btn--primary btn--lg contact-form__submit" type="submit">Send inquiry <svg><use href="#i-arrow"/></svg></button>
           </form>
         </div>
       </div>
